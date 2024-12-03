@@ -4,10 +4,11 @@ public class OfficeGen {
     // usableRooms >= 1
     // bspw. Flur oder Nassraum
     // sideRooms
+    LinkedMapGen<String, Room> rooms;
 
-    public OfficeGen(int id, double areaOfAdjacentRooms) {
+    public OfficeGen(int id, LinkedMapGen<String, Room> rooms) {
         this.id = id;
-        this.areaOfAdjacentRooms = areaOfAdjacentRooms;
+        this.rooms = rooms;
     }
 
     public int getId() {
@@ -32,6 +33,13 @@ public class OfficeGen {
     }
 
     // Ändern der Informationen von Räumen wie oben beschrieben
+    // TODO is der Parameter für usage ein String?
+    public void changeRoomUsage (String nameRoom, String newUsage) {
+        Room room = rooms.get(nameRoom);
+        if (room != null) {
+            room.setUsage(newUsage);
+        }
+    }
 
     // Methoden zum Berechnen folgender (statistischer) Werte:
     // ...

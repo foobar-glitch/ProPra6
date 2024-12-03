@@ -1,3 +1,9 @@
+// String name
+// double length
+// double width
+// ggf. double window area
+// ggf. double luminous flux
+
 public interface Room {
     public String getName();
     public double getLength();
@@ -6,7 +12,8 @@ public interface Room {
     public double getWindowArea();
     // TODO only for rooms without windows
     public double getLuminousFlux();
-    public void setUsage();
+    // TODO is der Parameter für newUsage ein String?
+    public void setUsage(String newUsage);
     // TODO only for office space
     public int getNumberOfWorkspaces();
     // TODO only for storage room
