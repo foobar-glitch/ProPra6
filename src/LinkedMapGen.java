@@ -1,9 +1,21 @@
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 // Can't delete elements
 public class LinkedMapGen<K, V> {
 
     private LinkedMapGen<K, V> next = null;
     private K key;
     private V value;
+
+    public LinkedMapGen<K, V> getNext() {
+        return next;
+    }
+
+    public V getValue() {
+        return value;
+    }
 
     /**
      * parameterless Constructor; creates empty node

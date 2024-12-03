@@ -18,4 +18,6 @@ public interface Room {
     public int getNumberOfWorkspaces();
     // TODO only for storage room
     public double getStorageArea();
+
+    public String getUsage();
 }

@@ -1,6 +1,5 @@
 public class OfficeGen {
     int id;
-    double areaOfAdjacentRooms;
     // usableRooms >= 1
     // bspw. Flur oder Nassraum
     // sideRooms
@@ -16,12 +15,21 @@ public class OfficeGen {
     }
 
     public double getAreaOfAdjacentRooms() {
-        return areaOfAdjacentRooms;
+        double areaSideRooms = 0.0;
+        for (LinkedMapGen<String, Room> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
+            if (currentNode.getValue().getUsage().equals("sideRoom")) {
+                areaSideRooms += currentNode.getValue().getLength() * currentNode.getValue().getWidth();
+            }
+        }
+        return areaSideRooms;
     }
 
     public double totalArea() {
-        // add area of usable rooms to this
-        return areaOfAdjacentRooms;
+        double areaTotal = 0.0;
+        for (LinkedMapGen<String, Room> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
+                areaTotal += currentNode.getValue().getLength() * currentNode.getValue().getWidth();
+        }
+        return areaTotal;
     }
 
     public void addRoom() {
