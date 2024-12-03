@@ -2,7 +2,8 @@ public class OfficeGen {
     int id;
     double areaOfAdjacentRooms;
     // usableRooms >= 1
-    // unusableRooms
+    // bspw. Flur oder Nassraum
+    // sideRooms
 
     public OfficeGen(int id, double areaOfAdjacentRooms) {
         this.id = id;
