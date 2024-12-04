@@ -1,9 +1,9 @@
 public class OfficeGen {
-    int id;
+    private final int id;
     // usableRooms >= 1
     // bspw. Flur oder Nassraum
     // sideRooms
-    LinkedMapGen<String, Room> rooms;
+    private final LinkedMapGen<String, Room> rooms;
 
     public OfficeGen(int id, LinkedMapGen<String, Room> rooms) {
         this.id = id;
@@ -51,4 +51,32 @@ public class OfficeGen {
 
     // Methoden zum Berechnen folgender (statistischer) Werte:
     // ...
+    public double averageAreaRoom() {
+        return 0.0;
+    }
+
+    public double averageAreaRoomsWithWindows() {
+        return 0.0;
+    }
+
+    public double averageAreaRoomsNoWindows() {
+        return 0.0;
+    }
+
+    public double averageAreaStorageRooms() {
+        return 0.0;
+    }
+
+    public double averageNumberOfWorkspaces() {
+        return 0.0;
+    }
+
+    public <RoomType> double averageRatioWindowToArea() {
+        return 0.0;
+    }
+
+    public <RoomType> double averageRatioLuminousFluxToArea() {
+        return 0.0;
+    }
+
 }
