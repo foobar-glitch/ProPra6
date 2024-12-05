@@ -1,9 +1,9 @@
-public class StorageSpace implements Space{
+public class StorageSpace implements Space, UsableRoom{
 
-    private UsableRoom room;
+    private Room room;
     private double volume;
 
-    public StorageSpace(UsableRoom room, double volume){
+    public StorageSpace(Room room, double volume){
         this.room = room;
         this.volume = volume;
     }

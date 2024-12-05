@@ -1,8 +1,8 @@
-public class WorkSpace implements Space{
+public class WorkSpace implements Space, UsableRoom{
 
-    UsableRoom room;
+    Room room;
     double workStations;
-    public WorkSpace(UsableRoom room, double workStations){
+    public WorkSpace(Room room, double workStations){
         this.room = room;
         this.workStations = workStations;
     }

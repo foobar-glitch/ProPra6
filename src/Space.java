@@ -1,4 +1,4 @@
-public interface Space {
+public interface Space{
 
     Room room();
 

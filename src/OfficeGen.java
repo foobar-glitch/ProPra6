@@ -93,11 +93,39 @@ public class OfficeGen {
     }
 
     public double averageAreaRoomsWithWindows() {
-        return 0.0;
+        int len = 0;
+        double result = 0.0;
+
+        Iterator<Space> rooms = this.rooms.getValues();
+        while (rooms.hasNext()){
+            Room room = rooms.next().room();
+            if(room instanceof WindowRoom){
+                WindowRoom wRoom = (WindowRoom) room;
+                result+=wRoom.getArea();
+                len++;
+            }
+        }
+
+        if(len == 0) return 0;
+        return result / len;
     }
 
     public double averageAreaRoomsNoWindows() {
-        return 0.0;
+        int len = 0;
+        double result = 0.0;
+
+        Iterator<Space> rooms = this.rooms.getValues();
+        while (rooms.hasNext()){
+            Room room = rooms.next().room();
+            if(room instanceof WindowlessRoom){
+                WindowlessRoom wRoom = (WindowlessRoom) room;
+                result+=wRoom.getArea();
+                len++;
+            }
+        }
+
+        if(len == 0) return 0;
+        return result / len;
     }
 
     public double averageVolumeStorageRooms() {
@@ -139,10 +167,28 @@ public class OfficeGen {
         return result / len;
     }
 
-    public <RoomType> double averageRatioWindowToArea() {
-        return 0.0;
+    // TODO: zusätzliche Fallunterscheidung und Rückgabe eines Tuples
+    public double averageRatioWindowToArea() {
+        double area=0.0;
+        double wArea=0.0;
+
+        Iterator<Space> spaces = rooms.getValues();
+        while(spaces.hasNext()){
+            Room room = spaces.next().room();
+            if(room instanceof UsableRoom){
+                area+=room.getArea();
+                if(room instanceof WindowRoom){
+                    wArea+= ((WindowRoom) room).getWindowArea();
+                }
+            }
+        }
+
+        if(area == 0.0) return 0;
+
+        return wArea/area;
     }
 
+    //TODO: Später dann wie oben
     public <RoomType> double averageRatioLuminousFluxToArea() {
         return 0.0;
     }

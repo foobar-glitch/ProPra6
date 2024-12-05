@@ -1,4 +1,4 @@
-public class WindowlessRoom implements UsableRoom {
+public class WindowlessRoom implements Room {
     private final String name;
     private final double length, width, lightFlux;
     private String usageType;

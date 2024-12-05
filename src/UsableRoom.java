@@ -1,5 +1,2 @@
-public interface UsableRoom extends Room{
-
-
-
+public interface UsableRoom {
 }
