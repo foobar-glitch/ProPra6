@@ -41,7 +41,7 @@ public class OfficeGen {
         Room room = space.room();
         String roomId = room.getName();
 
-        // If roomName already present in Building => error, sma room can't exist twice
+        // If roomName already present in Building => error, same room can't exist twice
         if(rooms.get(roomId) != null) return;
 
         // Else Add room
@@ -80,11 +80,14 @@ public class OfficeGen {
         int len = 0;
         double result = 0.0;
 
-        Iterator<Space> rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next().room();
-            result += room.getArea();
-            len++;
+        Iterator<Space> spaces = this.rooms.getValues();
+        while(spaces.hasNext()){
+            Space space = spaces.next();
+            Room room = space.room();
+            if(space instanceof UsableSpace) {
+                result += room.getArea();
+                len++;
+            }
         }
 
         if(len == 0) return 0;
@@ -97,10 +100,11 @@ public class OfficeGen {
         int len = 0;
         double result = 0.0;
 
-        Iterator<Space> rooms = this.rooms.getValues();
-        while (rooms.hasNext()){
-            Room room = rooms.next().room();
-            if(room instanceof WindowRoom){
+        Iterator<Space> spaces = this.rooms.getValues();
+        while (spaces.hasNext()){
+            Space space = spaces.next();
+            Room room = space.room();
+            if(space instanceof UsableSpace && room instanceof WindowRoom){
                 WindowRoom wRoom = (WindowRoom) room;
                 result+=wRoom.getArea();
                 len++;
@@ -115,10 +119,11 @@ public class OfficeGen {
         int len = 0;
         double result = 0.0;
 
-        Iterator<Space> rooms = this.rooms.getValues();
-        while (rooms.hasNext()){
-            Room room = rooms.next().room();
-            if(room instanceof WindowlessRoom){
+        Iterator<Space> spaces = this.rooms.getValues();
+        while (spaces.hasNext()){
+            Space space = spaces.next();
+            Room room = space.room();
+            if(space instanceof UsableSpace && room instanceof WindowlessRoom){
                 WindowlessRoom wRoom = (WindowlessRoom) room;
                 result+=wRoom.getArea();
                 len++;
@@ -133,11 +138,11 @@ public class OfficeGen {
         int len = 0;
         double result = 0.0;
 
-        Iterator<Space> rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next().room();
-            if(room instanceof StorageSpace){
-                StorageSpace storage = (StorageSpace) room;
+        Iterator<Space> spaces = this.rooms.getValues();
+        while(spaces.hasNext()){
+            Space space = spaces.next();
+            if(space instanceof StorageSpace){
+                StorageSpace storage = (StorageSpace) space;
                 result+=storage.volume();
                 len++;
             }
@@ -155,9 +160,9 @@ public class OfficeGen {
 
         Iterator<Space> spaces = rooms.getValues();
         while(spaces.hasNext()){
-            Room room = spaces.next().room();
-            if(room instanceof WorkSpace){
-                WorkSpace workSpace = (WorkSpace) room;
+            Space space = spaces.next();
+            if(space instanceof WorkSpace){
+                WorkSpace workSpace = (WorkSpace) space;
                 result+=workSpace.workStations();
                 len++;
             }
@@ -167,8 +172,6 @@ public class OfficeGen {
 
         return result / len;
     }
-
-    // TODO: zusätzliche Fallunterscheidung und Rückgabe eines Tuples
 
     /**
      * @return  double[3]
