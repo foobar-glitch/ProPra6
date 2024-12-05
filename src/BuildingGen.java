@@ -24,5 +24,11 @@ public class BuildingGen {
 
     private void printAllOfficeInformation() {
         // TODO
+        LinkedMapGen<Integer, OfficeGen> iterator = offices;
+        while (iterator != null) {
+
+            System.out.println("The value is " + iterator.getValue());
+            iterator = iterator.getNext();
+        }
     }
 }
