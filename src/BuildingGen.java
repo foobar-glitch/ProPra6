@@ -1,28 +1,33 @@
 // TODO BuildingGen und CompanyGen sind so ähnlich könnte man hier eine gemeinsame abstrakte Elternklasse mit generischen Typen nehmen?
 
-public class BuildingGen {
+public class BuildingGen extends ContainerGen<Integer, Office> implements ContainerInterface<String>{
 
-    private final String name;
-    private final LinkedMapGen<Integer, OfficeGen> offices;
-
-    private BuildingGen(String name) {
-        this.name = name;
-        this.offices = new LinkedMapGen<Integer, OfficeGen>();
+    public BuildingGen(String name) {
+        super(name);
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public void print(){
+
+        LinkedMapGen<Integer, Office> map = this.map();
+        Iterator<Office> offices = map.getValues();
+        System.out.println("Offices");
+
+        int i=0;
+        while(offices.hasNext()){
+
+            Office office = offices.next();
+            System.out.println("Office " + i++ + ": " + office.id());
+            System.out.println("----------");
+            System.out.println(office);
+            System.out.println();
+        }
+
     }
 
-    private void addOffice(OfficeGen office){
-        offices.put(office.getId(), office);
+    @Override
+    public String id() {
+        return this.getName();
     }
 
-    private void removeOffice(OfficeGen office){
-        offices.remove(office.getId());
-    }
-
-    private void printAllOfficeInformation() {
-        // TODO
-    }
 }

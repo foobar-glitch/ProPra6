@@ -1,4 +1,4 @@
-public class Office {
+public class Office implements ContainerInterface<Integer>{
     private final int id;
     private final LinkedMapGen<String, Space> rooms;
 
@@ -245,8 +245,35 @@ public class Office {
         return new double[]{(wWindowArea+sWindowArea)/(storageArea+workingArea), wWindowArea/workingArea, sWindowArea/storageArea};
     }
 
+    /**
+     * @return [0] number of WorkSpaces; [1] number of StorageSpaces; [2] number of Useless Spaces
+     */
+    public int[] numberOfSpaces(){
+        int[] result = new int[3];
+        Iterator<Space> spaces = rooms.getValues();
+        while(spaces.hasNext()){
+            Space space = spaces.next();
+            if(space instanceof WorkSpace) result[0]++;
+            else if(space instanceof StorageSpace) result[1]++;
+            else result[2]++;
+        }
+
+        return result;
+    }
+
+    @Override
+    public Integer id(){return id;}
+
     @Override
     public String toString(){
-        return "Hilfe muss doch noch was implementiert werden!";
+        int[] numberOfSpaces = numberOfSpaces();
+        String result = "WorkSpaces: " + numberOfSpaces[0] + ", StorageSpaces: " + numberOfSpaces[1] + ", AdjacentSpaces: " + numberOfSpaces[2];
+        result+="\n" + ;
+
+        Iterator<Space> spaces = rooms.getValues();
+        while(spaces.hasNext()){
+            result += "\n" + spaces.next().toString();
+        }
+        return result;
     }
 }
