@@ -94,7 +94,7 @@ public class LinkedMapGen<K, V> {
      */
     public V put(K key, V newValue) {
         V oldValue = get(key);
-        insertPair(key, value);
+        insertPair(key, newValue);
         return oldValue;
     }
 

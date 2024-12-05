@@ -266,14 +266,19 @@ public class Office implements ContainerInterface<Integer>{
 
     @Override
     public String toString(){
+        String result = "Total Area: " + totalArea();
         int[] numberOfSpaces = numberOfSpaces();
-        String result = "WorkSpaces: " + numberOfSpaces[0] + ", StorageSpaces: " + numberOfSpaces[1] + ", AdjacentSpaces: " + numberOfSpaces[2];
-        result+="\n" + ;
+        result += "\n" + "WorkSpaces: " + numberOfSpaces[0] + ", StorageSpaces: " + numberOfSpaces[1] + ", AdjacentSpaces: " + numberOfSpaces[2];
 
-        Iterator<Space> spaces = rooms.getValues();
-        while(spaces.hasNext()){
-            result += "\n" + spaces.next().toString();
-        }
+        result +=   "\n" + "Average Area of Rooms: " + averageAreaRoom() + ", "
+                    + "Average Area of Rooms with Windows: " + averageAreaRoomsWithWindows() + ", \n"
+                    + "Average Area of Rooms without Windows: " + averageAreaRoomsNoWindows() + ", \n"
+                    + "Average Volume of Storage Rooms: " + averageVolumeStorageRooms() + ", \n"
+                    + "Average Number of Workspaces: " + averageNumberOfWorkspaces() + ", \n"
+                    + "Average Window to Area Ratio: " + averageRatioWindowToArea()[0] + ", \n"
+                    + "Average LuminousFlux to Area Ratio: " + averageRatioLuminousFluxToArea()[0]
+        ;
+        result+="\n";
         return result;
     }
 }
