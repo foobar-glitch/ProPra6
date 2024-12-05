@@ -1,4 +1,4 @@
-public class WorkSpace implements Space, UsableRoom{
+public class WorkSpace implements Space, UsableSpace {
 
     Room room;
     double workStations;

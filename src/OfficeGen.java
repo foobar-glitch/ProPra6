@@ -19,8 +19,9 @@ public class OfficeGen {
     public double getAreaOfAdjacentRooms() {
         double areaSideRooms = 0.0;
         for (LinkedMapGen<String, Space> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
-            Room room = currentNode.getValue().room();
-            if (!(room instanceof UsableRoom)) {
+            Space space = currentNode.getValue();
+            Room room = space.room();
+            if (!(space instanceof UsableSpace)) {
                 areaSideRooms += room.getLength() * room.getWidth();
             }
         }
@@ -174,8 +175,9 @@ public class OfficeGen {
 
         Iterator<Space> spaces = rooms.getValues();
         while(spaces.hasNext()){
-            Room room = spaces.next().room();
-            if(room instanceof UsableRoom){
+            Space space = spaces.next();
+            Room room = space.room();
+            if(space instanceof UsableSpace){
                 area+=room.getArea();
                 if(room instanceof WindowRoom){
                     wArea+= ((WindowRoom) room).getWindowArea();

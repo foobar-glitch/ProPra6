@@ -1,4 +1,4 @@
-public class StorageSpace implements Space, UsableRoom{
+public class StorageSpace implements Space, UsableSpace {
 
     private Room room;
     private double volume;
