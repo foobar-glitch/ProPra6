@@ -1,7 +1,6 @@
 public class WindowlessRoom implements Room {
     private final String name;
     private final double length, width, lightFlux;
-    private String usageType;
 
     public WindowlessRoom(String name, double length, double width, double lightFlux) {
         this.name = name;
