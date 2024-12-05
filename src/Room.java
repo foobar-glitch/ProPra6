@@ -5,6 +5,15 @@
 // ggf. double luminous flux
 
 public interface Room {
+    String getName();
+    double getLength();
+    double getWidth();
+    void setUsageType(String usageType);
+    String getUsageType();
+    double getArea();
+}
+/*
+public interface Room {
     public String getName();
     public double getLength();
     public double getWidth();
@@ -21,3 +30,4 @@ public interface Room {
 
     public String getUsage();
 }
+*/
