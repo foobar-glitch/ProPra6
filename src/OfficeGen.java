@@ -1,11 +1,11 @@
-public class OfficeGen {
+public class OfficeGen<K, V extends Space> {
     private final int id;
     // usableRooms >= 1
     // bspw. Flur oder Nassraum
     // sideRooms
-    private final LinkedMapGen<String, Space> rooms;
+    private final LinkedMapGen<K, V> rooms;
 
-    public OfficeGen(int id, LinkedMapGen<String, Space> rooms) {
+    public OfficeGen(int id, LinkedMapGen<K, V> rooms) {
         this.id = id;
         this.rooms = rooms;
     }
@@ -16,7 +16,7 @@ public class OfficeGen {
 
     public double getAreaOfAdjacentRooms() {
         double areaSideRooms = 0.0;
-        for (LinkedMapGen<String, Space> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
+        for (LinkedMapGen<K, V> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
             Space space = currentNode.getValue();
             Room room = space.room();
             if (!(space instanceof UsableSpace)) {
