@@ -1,4 +1,4 @@
-public class WindowlessRoom implements Room {
+public class WindowlessRoom implements UsableRoom {
     private final String name;
     private final double length, width, lightFlux;
     private String usageType;
@@ -18,12 +18,6 @@ public class WindowlessRoom implements Room {
 
     @Override
     public double getWidth() { return width; }
-
-    @Override
-    public void setUsageType(String usageType) { this.usageType = usageType; }
-
-    @Override
-    public String getUsageType() { return usageType; }
 
     @Override
     public double getArea() { return length * width; }

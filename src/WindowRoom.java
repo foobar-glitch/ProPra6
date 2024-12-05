@@ -1,4 +1,4 @@
-public class WindowRoom implements Room {
+public class WindowRoom implements UsableRoom {
     private final String name;
     private final double length, width, windowArea;
     private String usageType;

@@ -5,9 +5,9 @@ public class OfficeGen {
     // usableRooms >= 1
     // bspw. Flur oder Nassraum
     // sideRooms
-    private final LinkedMapGen<String, Room> rooms;
+    private final LinkedMapGen<String, Space> rooms;
 
-    public OfficeGen(int id, LinkedMapGen<String, Room> rooms) {
+    public OfficeGen(int id, LinkedMapGen<String, Space> rooms) {
         this.id = id;
         this.rooms = rooms;
     }
@@ -18,9 +18,10 @@ public class OfficeGen {
 
     public double getAreaOfAdjacentRooms() {
         double areaSideRooms = 0.0;
-        for (LinkedMapGen<String, Room> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
-            if (currentNode.getValue().getUsageType().equals("sideRoom")) {
-                areaSideRooms += currentNode.getValue().getLength() * currentNode.getValue().getWidth();
+        for (LinkedMapGen<String, Space> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
+            Room room = currentNode.getValue().room();
+            if (!(room instanceof UsableRoom)) {
+                areaSideRooms += room.getLength() * room.getWidth();
             }
         }
         return areaSideRooms;
@@ -28,25 +29,27 @@ public class OfficeGen {
 
     public double totalArea() {
         double areaTotal = 0.0;
-        for (LinkedMapGen<String, Room> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
-                areaTotal += currentNode.getValue().getLength() * currentNode.getValue().getWidth();
+        for (LinkedMapGen<String, Space> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
+            Room room = currentNode.getValue().room();
+            areaTotal += room.getLength() * room.getWidth();
         }
         return areaTotal;
     }
 
-    public void addRoom(Room room, String usageType) {
+    public void addRoom(Space space) {
+        Room room = space.room();
         String roomId = room.getName();
 
         // If roomName already present in Building => error, sma room can't exist twice
         if(rooms.get(roomId) != null) return;
 
         // Else Add room
-        room.setUsageType(usageType);
-        rooms.put(roomId, room);
+        rooms.put(roomId, space);
 
     }
 
-    public boolean removeRoom(Room room) {
+    public boolean removeRoom(Space space) {
+        Room room = space.room();
         String roomId = room.getName();
 
         if(rooms.get(roomId) == null) return false;
@@ -54,12 +57,19 @@ public class OfficeGen {
         return true;
     }
 
-    // Ändern der Informationen von Räumen wie oben beschrieben
-    // TODO is der Parameter für usage ein String?
-    public void changeRoomUsage (String nameRoom, String newUsage) {
-        Room room = rooms.get(nameRoom);
-        if (room != null) {
-            room.setUsageType(newUsage);
+    /**
+     * @param space New Space with same Room but in different Space.Class, f.ex.:
+     *              Room room = new Room();
+     *              Space space1 = WorkSpace(room, people);
+     *              this.addRoom(space1);
+     *              Space space2 = StorageSpace(room, volume);
+     *              this.changeRoomUsage(space2)
+     *              => Now, RoomUsage is changed from WorkSpace to Storage
+     */
+    public void changeRoomUsage (Space space) {
+        Room room = space.room();
+        if (rooms.get(room.getName()) != null) {
+            rooms.put(room.getName(), space);
         }
     }
 
@@ -69,9 +79,9 @@ public class OfficeGen {
         int len = 0;
         double result = 0.0;
 
-        Iterator<Room> rooms = this.rooms.getValues();
+        Iterator<Space> rooms = this.rooms.getValues();
         while(rooms.hasNext()){
-            Room room = rooms.next();
+            Room room = rooms.next().room();
             result += room.getArea();
             len++;
         }
@@ -94,11 +104,12 @@ public class OfficeGen {
         int len = 0;
         double result = 0.0;
 
-        Iterator<Room> rooms = this.rooms.getValues();
+        Iterator<Space> rooms = this.rooms.getValues();
         while(rooms.hasNext()){
-            Room room = rooms.next();
-            if(room.getUsageType().equals(UsageType.STORAGE_SPACE)){
-                result+=room.getVolume();
+            Room room = rooms.next().room();
+            if(room instanceof StorageSpace){
+                StorageSpace storage = (StorageSpace) room;
+                result+=storage.volume();
                 len++;
             }
         }
@@ -110,8 +121,22 @@ public class OfficeGen {
     }
 
     public double averageNumberOfWorkspaces() {
+        int len=0;
+        double result=0.0;
 
-        return 0.0;
+        Iterator<Space> spaces = rooms.getValues();
+        while(spaces.hasNext()){
+            Room room = spaces.next().room();
+            if(room instanceof WorkSpace){
+                WorkSpace workSpace = (WorkSpace) room;
+                result+=workSpace.workStations();
+                len++;
+            }
+        }
+
+        if(len == 0) return 0;
+
+        return result / len;
     }
 
     public <RoomType> double averageRatioWindowToArea() {

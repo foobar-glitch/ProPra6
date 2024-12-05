@@ -8,10 +8,7 @@ public interface Room {
     String getName();
     double getLength();
     double getWidth();
-    void setUsageType(String usageType);
-    String getUsageType();
     double getArea();
-    double getVolume();
 }
 /*
 public interface Room {
