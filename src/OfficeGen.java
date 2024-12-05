@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class OfficeGen {
     private final int id;
     // usableRooms >= 1
@@ -32,12 +34,24 @@ public class OfficeGen {
         return areaTotal;
     }
 
-    public void addRoom() {
-        // how to add usable/unusable room? how to differenciate??
+    public void addRoom(Room room, String usageType) {
+        String roomId = room.getName();
+
+        // If roomName already present in Building => error, sma room can't exist twice
+        if(rooms.get(roomId) != null) return;
+
+        // Else Add room
+        room.setUsageType(usageType);
+        rooms.put(roomId, room);
+
     }
 
-    public void removeRoom() {
-        // how to remove usable/unusable room? how to differenciate??
+    public boolean removeRoom(Room room) {
+        String roomId = room.getName();
+
+        if(rooms.get(roomId) == null) return false;
+        rooms.remove(roomId);
+        return true;
     }
 
     // Ändern der Informationen von Räumen wie oben beschrieben
@@ -52,7 +66,21 @@ public class OfficeGen {
     // Methoden zum Berechnen folgender (statistischer) Werte:
     // ...
     public double averageAreaRoom() {
-        return 0.0;
+        int len = 0;
+        double result = 0;
+
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Room room = rooms.next();
+            result += room.getArea();
+            len++;
+        }
+
+        if(len == 0) return 0;
+
+        result/=len;
+
+        return result;
     }
 
     public double averageAreaRoomsWithWindows() {

@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 /**
  * Implementation of a simple LinkedList
  */
-public class NodeList<X> {
+public class NodeListGen<X> {
 
     Node<X> start = null;
 
