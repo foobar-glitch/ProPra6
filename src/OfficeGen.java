@@ -79,7 +79,6 @@ public class OfficeGen {
         if(len == 0) return 0;
 
         result/=len;
-
         return result;
     }
 
