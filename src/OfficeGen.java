@@ -17,7 +17,7 @@ public class OfficeGen {
     public double getAreaOfAdjacentRooms() {
         double areaSideRooms = 0.0;
         for (LinkedMapGen<String, Room> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
-            if (currentNode.getValue().getUsage().equals("sideRoom")) {
+            if (currentNode.getValue().getUsageType().equals("sideRoom")) {
                 areaSideRooms += currentNode.getValue().getLength() * currentNode.getValue().getWidth();
             }
         }
@@ -45,7 +45,7 @@ public class OfficeGen {
     public void changeRoomUsage (String nameRoom, String newUsage) {
         Room room = rooms.get(nameRoom);
         if (room != null) {
-            room.setUsage(newUsage);
+            room.setUsageType(newUsage);
         }
     }
 
