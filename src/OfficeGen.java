@@ -169,30 +169,82 @@ public class OfficeGen {
     }
 
     // TODO: zusätzliche Fallunterscheidung und Rückgabe eines Tuples
-    public double averageRatioWindowToArea() {
-        double area=0.0;
-        double wArea=0.0;
+
+    /**
+     * @return  double[3]
+     *          [0] average across all rooms
+     *          [1] average across WorkingSpaces
+     *          [2] average across StorageSpaces
+     */
+    public double[] averageRatioWindowToArea() {
+        double workingArea=0.0;
+        double wWindowArea=0.0;
+        double storageArea=0.0;
+        double sWindowArea=0.0;
+
 
         Iterator<Space> spaces = rooms.getValues();
         while(spaces.hasNext()){
             Space space = spaces.next();
             Room room = space.room();
             if(space instanceof UsableSpace){
-                area+=room.getArea();
                 if(room instanceof WindowRoom){
-                    wArea+= ((WindowRoom) room).getWindowArea();
+                    if(space instanceof WorkSpace) {
+                        workingArea += room.getArea();
+                        wWindowArea += ((WindowRoom) room).getWindowArea();
+                    }
+                    else if(space instanceof StorageSpace){
+                        storageArea += room.getArea();
+                        sWindowArea += ((WindowRoom) room).getWindowArea();
+                    }
                 }
             }
         }
 
-        if(area == 0.0) return 0;
+        if(workingArea == 0.0 && storageArea == 0.0) return new double[]{0,0,0};
+        else if(workingArea == 0.0) return new double[]{(wWindowArea+sWindowArea)/storageArea, 0.0, sWindowArea/storageArea};
+        else if(storageArea == 0.0) return new double[]{(wWindowArea+sWindowArea)/workingArea, wWindowArea/workingArea, 0.0};
 
-        return wArea/area;
+        return new double[]{(wWindowArea+sWindowArea)/(storageArea+workingArea), wWindowArea/workingArea, sWindowArea/storageArea};
     }
 
-    //TODO: Später dann wie oben
-    public <RoomType> double averageRatioLuminousFluxToArea() {
-        return 0.0;
+
+    /**
+     * @return  double[3]
+     *          [0] average across all rooms
+     *          [1] average across WorkingSpaces
+     *          [2] average across StorageSpaces
+     */
+    public double[] averageRatioLuminousFluxToArea() {
+        double workingArea=0.0;
+        double wWindowArea=0.0;
+        double storageArea=0.0;
+        double sWindowArea=0.0;
+
+
+        Iterator<Space> spaces = rooms.getValues();
+        while(spaces.hasNext()){
+            Space space = spaces.next();
+            Room room = space.room();
+            if(space instanceof UsableSpace){
+                if(room instanceof WindowlessRoom){
+                    if(space instanceof WorkSpace) {
+                        workingArea += room.getArea();
+                        wWindowArea += ((WindowlessRoom) room).getLightFlux();
+                    }
+                    else if(space instanceof StorageSpace){
+                        storageArea += room.getArea();
+                        sWindowArea += ((WindowlessRoom) room).getLightFlux();
+                    }
+                }
+            }
+        }
+
+        if(workingArea == 0.0 && storageArea == 0.0) return new double[]{0,0,0};
+        else if(workingArea == 0.0) return new double[]{(wWindowArea+sWindowArea)/storageArea, 0.0, sWindowArea/storageArea};
+        else if(storageArea == 0.0) return new double[]{(wWindowArea+sWindowArea)/workingArea, wWindowArea/workingArea, 0.0};
+
+        return new double[]{(wWindowArea+sWindowArea)/(storageArea+workingArea), wWindowArea/workingArea, sWindowArea/storageArea};
     }
 
 }
