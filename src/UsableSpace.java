@@ -1,2 +1,1 @@
-public interface UsableSpace {
-}
+public interface UsableSpace {}

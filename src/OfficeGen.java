@@ -250,4 +250,9 @@ public class OfficeGen {
         return new double[]{(wWindowArea+sWindowArea)/(storageArea+workingArea), wWindowArea/workingArea, sWindowArea/storageArea};
     }
 
+    @Override
+    public String toString(){
+        return "Hilfe muss doch noch was implementiert werden!";
+    }
+
 }
