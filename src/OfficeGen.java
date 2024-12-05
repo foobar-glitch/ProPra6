@@ -1,5 +1,3 @@
-import java.util.Iterator;
-
 public class OfficeGen {
     private final int id;
     // usableRooms >= 1

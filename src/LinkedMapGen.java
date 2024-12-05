@@ -1,8 +1,3 @@
-import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
-
-// Can't delete elements
 public class LinkedMapGen<K, V> {
 
     private LinkedMapGen<K, V> next;
