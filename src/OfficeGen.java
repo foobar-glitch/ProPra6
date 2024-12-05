@@ -67,7 +67,7 @@ public class OfficeGen {
     // ...
     public double averageAreaRoom() {
         int len = 0;
-        double result = 0;
+        double result = 0.0;
 
         Iterator<Room> rooms = this.rooms.getValues();
         while(rooms.hasNext()){
@@ -90,11 +90,27 @@ public class OfficeGen {
         return 0.0;
     }
 
-    public double averageAreaStorageRooms() {
-        return 0.0;
+    public double averageVolumeStorageRooms() {
+        int len = 0;
+        double result = 0.0;
+
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Room room = rooms.next();
+            if(room.getUsageType().equals(UsageType.STORAGE_SPACE)){
+                result+=room.getVolume();
+                len++;
+            }
+        }
+
+        if(len == 0) return 0;
+
+        result/=len;
+        return result;
     }
 
     public double averageNumberOfWorkspaces() {
+
         return 0.0;
     }
 

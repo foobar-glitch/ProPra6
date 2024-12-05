@@ -1,4 +1,4 @@
 public final class UsageType{
-    public static final String BUERO_RAUM = "B";
-    public static final String ABSTELL_RAUM = "A";
+    public static final String WORK_SPACE = "B";
+    public static final String STORAGE_SPACE = "A";
 }

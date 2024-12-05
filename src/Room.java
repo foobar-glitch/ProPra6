@@ -11,6 +11,7 @@ public interface Room {
     void setUsageType(String usageType);
     String getUsageType();
     double getArea();
+    double getVolume();
 }
 /*
 public interface Room {
