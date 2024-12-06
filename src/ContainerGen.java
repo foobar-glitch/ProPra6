@@ -15,7 +15,7 @@ public abstract class ContainerGen<K, V  extends ContainerInterface<K>> {
     public void remove(V elem){
         if(map.get(elem.id()) == null) return;
         map.remove(elem.id());
-    };
+    }
 
     public void print(){}
 
