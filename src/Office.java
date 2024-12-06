@@ -265,6 +265,11 @@ public class Office implements ContainerInterface<Integer>{
     public Integer id(){return id;}
 
     @Override
+    public void print() {
+
+    }
+
+    @Override
     public String toString(){
         String result = "Total Area: " + totalArea();
         int[] numberOfSpaces = numberOfSpaces();
