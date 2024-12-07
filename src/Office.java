@@ -259,7 +259,7 @@ public class Office implements ContainerInterface<Integer>{
 
     @Override
     public void print() {
-
+        System.out.println(this);
     }
 
     @Override
