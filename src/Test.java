@@ -12,6 +12,18 @@ public class Test {
 
     public static void main(String[] args) {
 
+        LinkedMapGen<String, Room> map = new LinkedMapGen<>();
+        Room Wichtelraum = new WindowRoom(
+                "Wichtelraum",
+                250,
+                250,
+                75,
+                new WorkSpace(20)
+        );
+        map.put(Wichtelraum.getName(), Wichtelraum);
+        Office office = new Office(5, map);
+        office.print();
+
 
     }
 

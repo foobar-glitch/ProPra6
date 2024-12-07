@@ -1,4 +1,4 @@
-public class OfficeGen<K, V extends Space> implements ContainerInterface<Integer> {
+public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer> {
     private final int id;
     private final LinkedMapGen<K, V> rooms;
 
@@ -11,13 +11,10 @@ public class OfficeGen<K, V extends Space> implements ContainerInterface<Integer
 
     public double getAreaOfAdjacentRooms() {
         double areaSideRooms = 0.0;
-        V space;
-        for (LinkedMapGen<K, V> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
-            space = currentNode.getValue();
-            Room room = space.room();
-            if (!(space instanceof UsableSpace)) {
-                areaSideRooms += room.getLength() * room.getWidth();
-            }
+        Iterator<V> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Room room = rooms.next();
+            if(! (room.space() instanceof UsableSpace) ) areaSideRooms+=room.getArea();
         }
         return areaSideRooms;
     }
