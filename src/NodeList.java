@@ -18,6 +18,7 @@ public class NodeList {
         this.head = null;
     }
 
+
     // Method to add a string to the end of the list
     public void add(String data) {
         Node newNode = new Node(data);
@@ -77,7 +78,7 @@ public class NodeList {
         }
         return count;
     }
-    
+
     /*
     public void iterateWithFor() {
         for (Node current = head; current != null; current = current.next) {
