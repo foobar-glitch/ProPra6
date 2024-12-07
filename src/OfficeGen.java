@@ -2,6 +2,7 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
     private final int id;
     private final LinkedMapGen<K, V> rooms;
 
+    // TODO constructor soll laut Aufgabenstellung auch eine double mit der Fläche der Nebenraeume setzten!!!
     public OfficeGen(int id, LinkedMapGen<K, V> rooms) {
         this.id = id;
         this.rooms = rooms;

@@ -1,3 +1,9 @@
+// TODO ist das hier eine geschachtelte Klasse?
+//  "Schreiben Sie (abgesehen von geschachtelten Klassen) nicht mehr als eine
+//  Klasse in jede Datei. Verwenden Sie keine Umlaute in Dateinamen.
+//  Achten Sie darauf, dass Sie keine Java-Dateien abgeben, die nicht zu Ihrer
+//  Lösung gehören (alte Versionen, Reste aus früheren Versuchen, etc.)."
+
 import java.util.NoSuchElementException;
 
 /**

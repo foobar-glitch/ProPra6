@@ -8,9 +8,15 @@ public class Test {
      2. add and remove Offices one at a time to the Buildings; access the Offices via their unique id number
      3. add, remove and update the information in Rooms one at a time to the Offices; access Offices via their unique id number/ access Offices via their unique name
      4. calculate and output on the screen all the statistical information for all Offices
+
+    Test for behaviour when dividing by 0!!!
      */
 
     public static void main(String[] args) {
+
+        CompanyGen testGenCompany = new CompanyGen("Example Inc.");
+        BuildingGen testGenBuilding1 = new BuildingGen("Example Inc. Headquarters");
+        BuildingGen testGenBuilding2 = new BuildingGen("Example Inc. Asia");
 
         LinkedMapGen<String, Room> map = new LinkedMapGen<>();
         Room Wichtelraum = new WindowRoom(
