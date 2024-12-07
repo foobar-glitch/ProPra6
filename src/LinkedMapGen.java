@@ -1,8 +1,3 @@
-import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
-
-// Can't delete elements
 public class LinkedMapGen<K, V> {
 
     private LinkedMapGen<K, V> next;
@@ -99,9 +94,53 @@ public class LinkedMapGen<K, V> {
      */
     public V put(K key, V newValue) {
         V oldValue = get(key);
-        insertPair(key, value);
+        insertPair(key, newValue);
         return oldValue;
     }
+
+    /**
+     * @return NodeList elem, containing all values in this
+     */
+    public NodeListGen<V> valueList(){
+        NodeListGen<V> result = new NodeListGen<V>();
+
+        if(this.key == null && this.next == null) return result;
+
+        LinkedMapGen<K, V> tmp = this;
+        while(tmp!=null){
+            result.add(tmp.getValue());
+            tmp = tmp.getNext();
+        }
+
+        return result;
+    }
+
+    /**
+     * @return Iterator over all values V inside this
+     */
+    public Iterator<V> getValues(){return valueList().iterator();}
+
+    /**
+     * @return NodeList elem, containing all keys in this
+     */
+    public NodeListGen<K> keyList(){
+        NodeListGen<K> result = new NodeListGen<K>();
+
+        if(this.key == null && this.next == null) return result;
+
+        LinkedMapGen<K, V> tmp = this;
+        while(tmp!=null){
+            result.add(tmp.key);
+            tmp = tmp.getNext();
+        }
+
+        return result;
+    }
+
+    /**
+     * @return Iterator over all keys K inside this
+     */
+    public Iterator<K> getKeys(){return keyList().iterator();}
 
     /**
      * removes mapping from this LinkedMap structure (sets key and value to null -> sets Node to empty)
