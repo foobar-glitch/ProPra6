@@ -27,6 +27,7 @@ public class Test {
         Room testGenRoom_Acc = new WindowRoom("Accounting", 125, 75, 2000, new WorkSpace(650));
         Room testGenRoom_CR1 = new WindowRoom("Conference Room 1", 6, 18, 25, new WorkSpace(12));
         Room testGenRoom_CR2 = new WindowRoom("Conference Room 2", 15, 25, 40, new WorkSpace(200));
+        Room testGenRoom_Caf = new WindowRoom("Cafeteria", 15, 10, 30, new WorkSpace(1));
         Room testGenRoom_Arc = new WindowlessRoom("Archive", 15, 25, 350, new StorageSpace(350));
         Room testGenRoom_TE = new WindowRoom("Technical Equipment", 10, 2, 6, new StorageSpace(10));
         Room testGenRoom_OM = new WindowRoom("Office Materials", 5, 6, 8, new StorageSpace(30));
@@ -45,21 +46,26 @@ public class Test {
         LinkedMapGen<String, Room> roomsGenOffice2 = new LinkedMapGen<String, Room>();
         // Conference Room 2
         roomsGenOffice2.put(testGenRoom_Arc.getName(), testGenRoom_CR2);
-        // contains Archive
+        // Archive
+        roomsGenOffice2.put(testGenRoom_Arc.getName(), testGenRoom_Arc);
+        // contains Conference Room 2 and Archive
         OfficeGen<String, Room> testGenOffice2 = new OfficeGen<String, Room>(1, roomsGenOffice2);
 
         //                                      Office3
         LinkedMapGen<String, Room> roomsGenOffice3 = new LinkedMapGen<String, Room>();
-        // Archive
-        roomsGenOffice3.put(testGenRoom_Arc.getName(), testGenRoom_Arc);
-        // contains Archive
+        // Cafeteria
+        roomsGenOffice3.put(testGenRoom_Arc.getName(), testGenRoom_Caf);
+        // Storage for Technical Equipment
+        roomsGenOffice3.put(testGenRoom_Arc.getName(), testGenRoom_TE);
+        // contains Cafeteria and Technical Equipment
         OfficeGen<String, Room> testGenOffice3 = new OfficeGen<String, Room>(1, roomsGenOffice3);
 
         //                                      Office4
         LinkedMapGen<String, Room> roomsGenOffice4 = new LinkedMapGen<String, Room>();
-        // Archive
-        roomsGenOffice4.put(testGenRoom_Arc.getName(), testGenRoom_TE);
-        // contains Archive
+
+        // TODO add Office Materials and create and add office Asia oder so
+
+
         OfficeGen<String, Room> testGenOffice4 = new OfficeGen<String, Room>(1, roomsGenOffice4);
 
         // Test create Company
