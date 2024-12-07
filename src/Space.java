@@ -1,5 +1,1 @@
-public interface Space{
-
-    Room room();
-
-}
+public interface Space{}
