@@ -1,6 +1,6 @@
 public class NodeList {
     // Node class representing an element of the LinkedList
-    private static class Node {
+    public static class Node {
         String data;
         Node next;
 
@@ -77,4 +77,12 @@ public class NodeList {
         }
         return count;
     }
+    
+    /*
+    public void iterateWithFor() {
+        for (Node current = head; current != null; current = current.next) {
+            System.out.println(current.data);
+        }
+    }
+     */
 }
