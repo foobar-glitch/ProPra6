@@ -3,4 +3,7 @@ public interface Room {
     double getLength();
     double getWidth();
     double getArea();
+
+    Space space();
+    void setSpace(Space space);
 }
