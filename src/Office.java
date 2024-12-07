@@ -1,8 +1,8 @@
 public class Office implements ContainerInterface<Integer>{
     private final int id;
-    private final LinkedMapGen<String, Space> rooms;
+    private final LinkedMapGen<String, Room> rooms;
 
-    public Office(int id, LinkedMapGen<String, Space> rooms) {
+    public Office(int id, LinkedMapGen<String, Room> rooms) {
         this.id = id;
         this.rooms = rooms;
     }
@@ -13,39 +13,35 @@ public class Office implements ContainerInterface<Integer>{
 
     public double getAreaOfAdjacentRooms() {
         double areaSideRooms = 0.0;
-        for (LinkedMapGen<String, Space> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
-            Space space = currentNode.getValue();
-            Room room = space.room();
-            if (!(space instanceof UsableSpace)) {
-                areaSideRooms += room.getLength() * room.getWidth();
-            }
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Room room = rooms.next();
+            if(! (room.space() instanceof UsableSpace) ) areaSideRooms+=room.getArea();
         }
         return areaSideRooms;
     }
 
     public double totalArea() {
         double areaTotal = 0.0;
-        for (LinkedMapGen<String, Space> currentNode = rooms; currentNode != null; currentNode = currentNode.getNext()) {
-            Room room = currentNode.getValue().room();
-            areaTotal += room.getLength() * room.getWidth();
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            areaTotal+=rooms.next().getArea();
         }
         return areaTotal;
     }
 
-    public void addRoom(Space space) {
-        Room room = space.room();
+    public void addRoom(Room room) {
         String roomId = room.getName();
 
         // If roomName already present in Building => error, same room can't exist twice
         if(rooms.get(roomId) != null) return;
 
         // Else Add room
-        rooms.put(roomId, space);
+        rooms.put(roomId, room);
 
     }
 
-    public boolean removeRoom(Space space) {
-        Room room = space.room();
+    public boolean removeRoom(Room room) {
         String roomId = room.getName();
 
         if(rooms.get(roomId) == null) return false;
@@ -62,10 +58,10 @@ public class Office implements ContainerInterface<Integer>{
      *              this.changeRoomUsage(space2)
      *              => Now, RoomUsage is changed from WorkSpace to Storage
      */
-    public void changeRoomUsage (Space space) {
-        Room room = space.room();
-        if (rooms.get(room.getName()) != null) {
-            rooms.put(room.getName(), space);
+    public void changeRoomUsage (Room room, Space space) {
+        Room tmp = rooms.get(room.getName());
+        if (tmp != null) {
+            tmp.setSpace(space);
         }
     }
 
@@ -75,11 +71,10 @@ public class Office implements ContainerInterface<Integer>{
         int len = 0;
         double result = 0.0;
 
-        Iterator<Space> spaces = this.rooms.getValues();
-        while(spaces.hasNext()){
-            Space space = spaces.next();
-            Room room = space.room();
-            if(space instanceof UsableSpace) {
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Room room = rooms.next();
+            if(room.space() instanceof UsableSpace) {
                 result += room.getArea();
                 len++;
             }
@@ -95,11 +90,10 @@ public class Office implements ContainerInterface<Integer>{
         int len = 0;
         double result = 0.0;
 
-        Iterator<Space> spaces = this.rooms.getValues();
-        while (spaces.hasNext()){
-            Space space = spaces.next();
-            Room room = space.room();
-            if(space instanceof UsableSpace && room instanceof WindowRoom){
+        Iterator<Room> rooms = this.rooms.getValues();
+        while (rooms.hasNext()){
+            Room room = rooms.next();
+            if(room.space() instanceof UsableSpace && room instanceof WindowRoom){
                 WindowRoom wRoom = (WindowRoom) room;
                 result+=wRoom.getArea();
                 len++;
@@ -114,11 +108,10 @@ public class Office implements ContainerInterface<Integer>{
         int len = 0;
         double result = 0.0;
 
-        Iterator<Space> spaces = this.rooms.getValues();
-        while (spaces.hasNext()){
-            Space space = spaces.next();
-            Room room = space.room();
-            if(space instanceof UsableSpace && room instanceof WindowlessRoom){
+        Iterator<Room> rooms = this.rooms.getValues();
+        while (rooms.hasNext()){
+            Room room = rooms.next();
+            if(room.space() instanceof UsableSpace && room instanceof WindowlessRoom){
                 WindowlessRoom wRoom = (WindowlessRoom) room;
                 result+=wRoom.getArea();
                 len++;
@@ -133,11 +126,11 @@ public class Office implements ContainerInterface<Integer>{
         int len = 0;
         double result = 0.0;
 
-        Iterator<Space> spaces = this.rooms.getValues();
-        while(spaces.hasNext()){
-            Space space = spaces.next();
-            if(space instanceof StorageSpace){
-                StorageSpace storage = (StorageSpace) space;
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Room room = rooms.next();
+            if(room.space() instanceof StorageSpace){
+                StorageSpace storage = (StorageSpace) room.space();
                 result+=storage.volume();
                 len++;
             }
@@ -153,11 +146,11 @@ public class Office implements ContainerInterface<Integer>{
         int len=0;
         double result=0.0;
 
-        Iterator<Space> spaces = rooms.getValues();
-        while(spaces.hasNext()){
-            Space space = spaces.next();
-            if(space instanceof WorkSpace){
-                WorkSpace workSpace = (WorkSpace) space;
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Room room = rooms.next();
+            if(room.space() instanceof WorkSpace){
+                WorkSpace workSpace = (WorkSpace) room.space();
                 result+=workSpace.workStations();
                 len++;
             }
@@ -181,10 +174,10 @@ public class Office implements ContainerInterface<Integer>{
         double sWindowArea=0.0;
 
 
-        Iterator<Space> spaces = rooms.getValues();
-        while(spaces.hasNext()){
-            Space space = spaces.next();
-            Room room = space.room();
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Room room = rooms.next();
+            Space space = room.space();
             if(space instanceof UsableSpace){
                 if(room instanceof WindowRoom){
                     if(space instanceof WorkSpace) {
@@ -220,10 +213,10 @@ public class Office implements ContainerInterface<Integer>{
         double sWindowArea=0.0;
 
 
-        Iterator<Space> spaces = rooms.getValues();
-        while(spaces.hasNext()){
-            Space space = spaces.next();
-            Room room = space.room();
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Room room = rooms.next();
+            Space space = room.space();
             if(space instanceof UsableSpace){
                 if(room instanceof WindowlessRoom){
                     if(space instanceof WorkSpace) {
@@ -250,9 +243,9 @@ public class Office implements ContainerInterface<Integer>{
      */
     public int[] numberOfSpaces(){
         int[] result = new int[3];
-        Iterator<Space> spaces = rooms.getValues();
-        while(spaces.hasNext()){
-            Space space = spaces.next();
+        Iterator<Room> rooms = this.rooms.getValues();
+        while(rooms.hasNext()){
+            Space space = rooms.next().space();
             if(space instanceof WorkSpace) result[0]++;
             else if(space instanceof StorageSpace) result[1]++;
             else result[2]++;
