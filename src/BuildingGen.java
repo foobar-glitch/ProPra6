@@ -6,7 +6,16 @@ public class BuildingGen extends ContainerGen<Integer, OfficeGen<String, Room>> 
 
     @Override
     public String toString() {
-        return "Building: " + super.getName();
+        String allOneString = "Building: " + super.getName();
+        allOneString = allOneString.concat("\n-------------------------");
+        IteratorGen<OfficeGen<String, Room>> elems = super.map().getValues();
+        System.out.println("-------------------------");
+        while(elems.hasNext()){
+            System.out.println("\t" + elems.next().toString());
+        }
+
+        return allOneString;
+
     }
 
     @Override

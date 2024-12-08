@@ -22,8 +22,7 @@ public abstract class ContainerGen<K, V  extends ContainerInterface<K>> {
         System.out.println(name);
         System.out.println("-------------------------");
         while(elems.hasNext()){
-            //System.out.println("\t" + elems.next().toString());
-            System.out.println(elems.next());
+            System.out.println("\t" + elems.next().toString());
         }
     }
 
