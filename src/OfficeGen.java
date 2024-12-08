@@ -31,11 +31,17 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
 
     }
 
-    public Room getOffice(K identifier) {
+    // TODO rework this?
+    //  shouldnt this always just be room.getName()???
+    public void addRoom(K identifier, V room) {
+        rooms.put(identifier, room);
+    }
+
+    public Room getRoom(K identifier) {
         return rooms.get(identifier);
     }
 
-    public void removeOffice(K identifier) {
+    public void removeRoom(K identifier) {
         rooms.remove(identifier);
     }
 }

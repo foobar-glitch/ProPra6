@@ -87,7 +87,7 @@ public class Test {
         testGenBuilding1_HQ.removeOffice(3);
         testGenBuilding2_Asia.removeOffice(3);
         // Test change Offices (add and remove)
-        testGenBuilding1_HQ.getOffice(1).
+        testGenBuilding1_HQ.getOffice(2).add()
 
 
 
