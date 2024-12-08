@@ -1,4 +1,4 @@
-public interface Iterator {
+public interface RoomIterator {
 
     boolean hasNext();
     Room next();

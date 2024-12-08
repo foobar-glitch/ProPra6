@@ -3,7 +3,7 @@ import java.util.NoSuchElementException;
 /**
  * Simple Iterator iver Room objects implementation
  */
-class RoomNodeListIterator implements Iterator {
+class RoomNodeListIterator implements RoomIterator {
 
     RoomNode current;
 

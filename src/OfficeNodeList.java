@@ -1,27 +1,15 @@
-// TODO ist das hier eine geschachtelte Klasse?
-//  "Schreiben Sie (abgesehen von geschachtelten Klassen) nicht mehr als eine
-//  Klasse in jede Datei. Verwenden Sie keine Umlaute in Dateinamen.
-//  Achten Sie darauf, dass Sie keine Java-Dateien abgeben, die nicht zu Ihrer
-//  Lösung gehören (alte Versionen, Reste aus früheren Versuchen, etc.)."
-
-import java.util.NoSuchElementException;
-
-/**
- * Implementation of a simple LinkedList
- */
-public class NodeList {
-
-    RoomNode start = null;
+public class OfficeNodeList {
+    OfficeNode start = null;
 
     /**
      * Adds elem to NodeList
      * @param elem (elem!=null)
      */
-    public void add(Room elem){
-        if(start == null){start = new RoomNode(elem); return;}
-        RoomNode tmp = start;
-        while(tmp.next != null){tmp = tmp.next;}
-        tmp.next = new RoomNode(elem);
+    public void add(Office elem){
+        if(start == null){start = new OfficeNode(elem); return;}
+        OfficeNode tmp = start;
+        while(tmp.next() != null){tmp = tmp.next();}
+        tmp.setNext(new OfficeNode(elem));
     }
 
     /**
@@ -29,20 +17,20 @@ public class NodeList {
      * @param elem (elem!=null) elem to remove
      * @return true => NodeList contained elem || false => NodeList didn't contain elem
      */
-    public boolean remove(Room elem){
+    public boolean remove(Office elem){
         if(start == null) return false;
-        RoomNode tmp = start;
+        OfficeNode tmp = start;
         // Special case if start is removed
-        if(start.value.equals(elem)){start = start.next; return true;}
+        if(start.value().equals(elem)){start = start.next(); return true;}
         // Else
-        while(tmp.next != null){
+        while(tmp.next() != null){
             // If tmp.next equals elem, remove it and fix list
-            if(tmp.next.value.equals(elem)){
-                tmp.next = tmp.next.next;
+            if(tmp.next().value().equals(elem)){
+                tmp.setNext(tmp.next().next());
                 return true;
             }
             // Else go to next Node
-            tmp = tmp.next;
+            tmp = tmp.next();
         }
         return false;
     }
@@ -52,7 +40,7 @@ public class NodeList {
      * @param elem (!= null)
      * @return true (elem existed in NodeList) || false (elem didn't exist in NodeList)
      */
-    public boolean removeAll(Room elem){
+    public boolean removeAll(Office elem){
         if(!contains(elem)) return false;
 
         boolean state = true;
@@ -68,12 +56,12 @@ public class NodeList {
      * @param elem (elem!= null)
      * @return True (NodeList contains elem); False (NodeList doesn't contain elem)
      */
-    public boolean contains(Room elem){
+    public boolean contains(Office elem){
         if(start== null) return false;
-        RoomNode tmp = start;
+        OfficeNode tmp = start;
         while (tmp != null){
-            if(tmp.value.equals(elem)) return true;
-            tmp = tmp.next;
+            if(tmp.value().equals(elem)) return true;
+            tmp = tmp.next();
         }
         return false;
     }
@@ -83,14 +71,14 @@ public class NodeList {
      * @param index Index of element to be retrieved
      * @return Elem or Null if no element exists at this index
      */
-    public Room get(int index){
+    public Office get(int index){
         if(start == null) return null;
 
         int i = 0;
-        RoomNode tmp = start;
+        OfficeNode tmp = start;
         while (tmp != null){
-            if(i++ == index) return tmp.value;
-            tmp = tmp.next;
+            if(i++ == index) return tmp.value();
+            tmp = tmp.next();
         }
 
         return null;
@@ -104,8 +92,8 @@ public class NodeList {
         int len = 0;
         if(start == null) return len;
 
-        RoomNode tmp = start;
-        while(tmp != null){len++; tmp=tmp.next;}
+        OfficeNode tmp = start;
+        while(tmp != null){len++; tmp=tmp.next();}
 
         return len;
     }
@@ -114,8 +102,8 @@ public class NodeList {
      * Live-Iterator over all elements in NodeList
      * @return Iterator
      */
-    public Iterator iterator(){
-        return new RoomNodeListIterator(start);
+    public RoomIterator iterator(){
+        return new OfficeNodeListIterator(start);
     }
 
     /**
@@ -125,12 +113,11 @@ public class NodeList {
     public String toString(){
         if(start == null) return "[]";
         StringBuilder stringBuilder = new StringBuilder();
-        RoomNode tmp = start;
+        OfficeNode tmp = start;
         while(tmp != null){
-            stringBuilder.append(tmp.value).append(", ");
-            tmp = tmp.next;
+            stringBuilder.append(tmp.value()).append(", ");
+            tmp = tmp.next();
         }
         return "[" + stringBuilder.substring(0, stringBuilder.length()-2) + "]";
     }
-
 }
