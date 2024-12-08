@@ -69,33 +69,39 @@ public class Test {
         roomsGenOffice4.put(testGenRoom_OM.getName(), testGenRoom_OM);
         OfficeGen<String, Room> testGenOffice4 = new OfficeGen<String, Room>(4, roomsGenOffice4);
 
+
+        // Test create first Office Building
+        BuildingGen testGenBuilding_HQ = new BuildingGen("Example Inc. Headquarters");
+        // Test create second Office Building
+        BuildingGen testGenBuilding_Asia = new BuildingGen("Example Inc. Asia");
         // Test create Company
         CompanyGen testGenCompany_ExInc = new CompanyGen("Example Inc.");
-        // Test create first Office Building
-        BuildingGen testGenBuilding1_HQ = new BuildingGen("Example Inc. Headquarters");
+        // Test add to Company
+        testGenCompany_ExInc.add(testGenBuilding_HQ);
+        testGenCompany_ExInc.add(testGenBuilding_Asia);
         // Test add Offices
-        testGenBuilding1_HQ.add(testGenOffice1);
-        testGenBuilding1_HQ.add(testGenOffice2);
-        testGenBuilding1_HQ.add(testGenOffice3);
-        // Test create second Office Buildings
-        BuildingGen testGenBuilding2_Asia = new BuildingGen("Example Inc. Asia");
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").add(testGenOffice1);
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").add(testGenOffice2);
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").add(testGenOffice3);
+        // Test add to second Office Building
         // Test add Office
-        testGenBuilding2_Asia.add(testGenOffice4);
+        testGenCompany_ExInc.getBuilding("Example Inc. Asia").add(testGenOffice4);
         // Test change Office Buildings (add and remove Offices)
-        testGenBuilding2_Asia.add(testGenBuilding1_HQ.getOffice(3));
-        testGenBuilding1_HQ.removeOffice(3);
-        testGenBuilding2_Asia.removeOffice(3);
+        testGenCompany_ExInc.getBuilding("Example Inc. Asia").add(testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(3));
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").removeOffice(3);
+        testGenCompany_ExInc.getBuilding("Example Inc. Asia").removeOffice(3);
         // Test change Offices (add and remove Rooms)
-        testGenBuilding1_HQ.getOffice(1).addRoom("Conference Room 2", testGenBuilding1_HQ.getOffice(2).getRoom("Conference Room 2"));
-        testGenBuilding1_HQ.getOffice(2).removeRoom("Conference Room 2");
-        testGenBuilding1_HQ.getOffice(2).addRoom("Accounting",testGenBuilding1_HQ.getOffice(1).getRoom("Accounting"));
-        testGenBuilding1_HQ.getOffice(1).removeRoom("Accounting");
-        testGenBuilding2_Asia.getOffice(4).addRoom("Accounting",testGenBuilding1_HQ.getOffice(2).getRoom("Accounting"));
-        testGenBuilding1_HQ.getOffice(2).removeRoom("Accounting");
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).addRoom("Conference Room 2", testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).getRoom("Conference Room 2"));
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).removeRoom("Conference Room 2");
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).addRoom("Accounting",testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Accounting"));
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).removeRoom("Accounting");
+        testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4).addRoom("Accounting",testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).getRoom("Accounting"));
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).removeRoom("Accounting");
         // Test change usage for Rooms
-        testGenBuilding1_HQ.getOffice(1).getRoom("Conference Room 1").setSpace(new StorageSpace(100));
-        testGenBuilding2_Asia.getOffice(4).getRoom("Office Materials").setSpace(new WorkSpace(2));
+        testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Conference Room 1").setSpace(new StorageSpace(100));
+        testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4).getRoom("Office Materials").setSpace(new WorkSpace(2));
         // Test output all statistics
+        LinkedMapGen<String, BuildingGen> sanityTest = testGenCompany_ExInc.map();
         testGenCompany_ExInc.print();
     }
 }

@@ -8,6 +8,11 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
         this.rooms = rooms;
     }
 
+    @Override
+    public String toString() {
+        return "Office with id: " + Integer.toString(id);
+    }
+
     public int getId() {return id;}
 
     public double getAreaOfAdjacentRooms() {

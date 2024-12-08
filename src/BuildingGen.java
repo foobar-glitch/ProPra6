@@ -4,10 +4,14 @@ public class BuildingGen extends ContainerGen<Integer, OfficeGen<String, Room>> 
         super(name);
     }
 
-    // TODO implement
+    @Override
+    public String toString() {
+        return "Building: " + super.getName();
+    }
+
     @Override
     public String id() {
-        return "";
+        return super.getName();
     }
 
     public OfficeGen<String, Room> getOffice(int id) {

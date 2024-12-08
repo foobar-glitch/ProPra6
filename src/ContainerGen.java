@@ -17,16 +17,13 @@ public abstract class ContainerGen<K, V  extends ContainerInterface<K>> {
         map.remove(elem.id());
     }
 
-    public void print(int nrTabs){
-        String tabs = "";
-        for (int i = 0; i < nrTabs; i ++) {
-            tabs = tabs.concat("\t");
-        }
+    public void print(){
         IteratorGen<V> elems = map.getValues();
-        System.out.println(tabs + name);
+        System.out.println(name);
         System.out.println("-------------------------");
         while(elems.hasNext()){
-            elems.next().print();
+            //System.out.println("\t" + elems.next().toString());
+            System.out.println(elems.next());
         }
     }
 
