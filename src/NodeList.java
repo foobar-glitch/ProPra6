@@ -134,39 +134,3 @@ public class NodeList {
     }
 
 }
-
-/**
- * Simple Node Implementation
- * @param <X> Type of Object to be value of Node
- */
-class RoomNode{
-
-    RoomNode next = null;
-    Room value = null;
-
-    public RoomNode(Room value){this.value = value;}
-
-}
-
-/**
- * Simple Iterator iver Room objects implementation
- */
-class RoomNodeListIterator implements Iterator {
-
-    RoomNode current;
-
-    public RoomNodeListIterator(RoomNode start){this.current = start;}
-
-    @Override
-    public boolean hasNext() {
-        return current != null;
-    }
-
-    @Override
-    public Room next() {
-        if(!hasNext()) throw new NoSuchElementException();
-        Room value = current.value;
-        current = current.next;
-        return value;
-    }
-}
