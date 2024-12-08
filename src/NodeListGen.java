@@ -114,7 +114,7 @@ public class NodeListGen<X> {
      * Live-Iterator over all elements in NodeList
      * @return Iterator
      */
-    public Iterator<X> iterator(){
+    public IteratorGen<X> iterator(){
         return new NodeListIterator<X>(start);
     }
 
@@ -152,7 +152,7 @@ class Node<X>{
  * Simple Iterator implementation
  * @param <X> Type X over which Objects is Iterated
  */
-class NodeListIterator<X> implements Iterator<X>{
+class NodeListIterator<X> implements IteratorGen<X> {
 
     Node<X> current;
 

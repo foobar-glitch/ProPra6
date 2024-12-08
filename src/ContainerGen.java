@@ -18,7 +18,7 @@ public abstract class ContainerGen<K, V  extends ContainerInterface<K>> {
     }
 
     public void print(){
-        Iterator<V> elems = map.getValues();
+        IteratorGen<V> elems = map.getValues();
         System.out.println(name);
         System.out.println("-------------------------");
         while(elems.hasNext()){

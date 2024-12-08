@@ -12,7 +12,7 @@ public class Company extends ContainerGen<String, Building> implements Container
         System.out.println("#########################");
         System.out.println();
         int i=0;
-        Iterator<Building> buildings = map.getValues();
+        IteratorGen<Building> buildings = map.getValues();
         while(buildings.hasNext()){
             Building building = buildings.next();
             System.out.println("Building " + i++ + ": " + building.getName());
