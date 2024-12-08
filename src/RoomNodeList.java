@@ -9,7 +9,7 @@
  */
 public class RoomNodeList {
 
-    RoomNode start = null;
+    private RoomNode start = null;
 
     /**
      * Adds elem to NodeList
@@ -18,8 +18,8 @@ public class RoomNodeList {
     public void add(Room elem){
         if(start == null){start = new RoomNode(elem); return;}
         RoomNode tmp = start;
-        while(tmp.next != null){tmp = tmp.next;}
-        tmp.next = new RoomNode(elem);
+        while(tmp.next() != null){tmp = tmp.next();}
+        tmp.setNext(new RoomNode(elem));
     }
 
     /**
@@ -31,16 +31,16 @@ public class RoomNodeList {
         if(start == null) return false;
         RoomNode tmp = start;
         // Special case if start is removed
-        if(start.value.equals(elem)){start = start.next; return true;}
+        if(start.value().equals(elem)){start = start.next(); return true;}
         // Else
-        while(tmp.next != null){
+        while(tmp.next() != null){
             // If tmp.next equals elem, remove it and fix list
-            if(tmp.next.value.equals(elem)){
-                tmp.next = tmp.next.next;
+            if(tmp.next().value().equals(elem)){
+                tmp.setNext(tmp.next().next());
                 return true;
             }
             // Else go to next Node
-            tmp = tmp.next;
+            tmp = tmp.next();
         }
         return false;
     }
@@ -70,8 +70,8 @@ public class RoomNodeList {
         if(start== null) return false;
         RoomNode tmp = start;
         while (tmp != null){
-            if(tmp.value.equals(elem)) return true;
-            tmp = tmp.next;
+            if(tmp.value().equals(elem)) return true;
+            tmp = tmp.next();
         }
         return false;
     }
@@ -87,8 +87,8 @@ public class RoomNodeList {
         int i = 0;
         RoomNode tmp = start;
         while (tmp != null){
-            if(i++ == index) return tmp.value;
-            tmp = tmp.next;
+            if(i++ == index) return tmp.value();
+            tmp = tmp.next();
         }
 
         return null;
@@ -103,7 +103,7 @@ public class RoomNodeList {
         if(start == null) return len;
 
         RoomNode tmp = start;
-        while(tmp != null){len++; tmp=tmp.next;}
+        while(tmp != null){len++; tmp=tmp.next();}
 
         return len;
     }
@@ -125,8 +125,8 @@ public class RoomNodeList {
         StringBuilder stringBuilder = new StringBuilder();
         RoomNode tmp = start;
         while(tmp != null){
-            stringBuilder.append(tmp.value).append(", ");
-            tmp = tmp.next;
+            stringBuilder.append(tmp.value()).append(", ");
+            tmp = tmp.next();
         }
         return "[" + stringBuilder.substring(0, stringBuilder.length()-2) + "]";
     }

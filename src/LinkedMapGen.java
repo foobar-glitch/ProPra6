@@ -22,12 +22,11 @@ public class LinkedMapGen<K, V> {
     }
 
     /**
-     * Constructor with Parameters
-     *
-     * @param key key; can not be null
-     * @param value value
+     * Creates new "Node" of this with given key and value
+     * @param key key!=null
+     * @param value value!=null
      */
-    public LinkedMapGen(K key, V value) {
+    private LinkedMapGen(K key, V value) {
         this.next = null;
         this.key = key;
         this.value = value;
@@ -36,7 +35,7 @@ public class LinkedMapGen<K, V> {
     /**
      * recursively looks for a node in the LinkedMap containing the key
      *
-     * @param key key to look up
+     * @param key key!=null, key to look up
      * @return node containing the key; null if no node with the key is not found
      */
     private LinkedMapGen<K, V> findNode(K key) {
@@ -53,7 +52,7 @@ public class LinkedMapGen<K, V> {
     /**
      * looks for a node in the LinkedMap containing the key
      *
-     * @param key key to look up
+     * @param key key!=null, key to look up
      * @return value that is mapped to key; null if key is not found
      */
     public V get (K key) {
@@ -69,8 +68,8 @@ public class LinkedMapGen<K, V> {
      * recursively looks for place to insert pair; if key already exists overwrites value at that node; otherwise
      * writes value-key pair to the earliest empty node or if not adds new node for value-key pair at the end of list
      *
-     * @param key key of key-value pair to add; can not be null
-     * @param value value of key-value pair to add
+     * @param key key!=null, key of key-value pair to add; can not be null
+     * @param value value!=null, value of key-value pair to add
      */
     private void insertPair(K key, V value) {
         if ((this.key == null && this.value == null) || (this.key != null && this.key.equals(key))) {
@@ -88,8 +87,8 @@ public class LinkedMapGen<K, V> {
     /**
      * adds mapping to this LinkedMap structure
      *
-     * @param key key of key-value pair to add
-     * @param newValue value of key-value pair to add
+     * @param key key!=null, key of key-value pair to add
+     * @param newValue newValue!=null, value of key-value pair to add
      * @return null if key was not already included; otherwise old value assigned to the key
      */
     public V put(K key, V newValue) {
@@ -117,7 +116,7 @@ public class LinkedMapGen<K, V> {
     }
 
     /**
-     * @return Iterator over all values V inside this
+     * @return Iterator over all values inside this
      */
     public IteratorGen<V> getValues(){return valueList().iterator();}
 
@@ -139,14 +138,14 @@ public class LinkedMapGen<K, V> {
     }
 
     /**
-     * @return Iterator over all keys K inside this
+     * @return Iterator over all keys inside this
      */
     public IteratorGen<K> getKeys(){return keyList().iterator();}
 
     /**
      * removes mapping from this LinkedMap structure (sets key and value to null -> sets Node to empty)
      *
-     * @param key key of key-value pair to add
+     * @param key key!=null, key of key-value pair to remove
      * @return null if key could not be found; otherwise old value assigned to the key
      */
     public V remove(K key) {

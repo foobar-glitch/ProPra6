@@ -81,7 +81,7 @@ public class NodeListGen<X> {
     /**
      * Retrieves Element at Index index, if there is no elem at index return null
      * @param index Index of element to be retrieved
-     * @return Elem or Null if no element exists at this index
+     * @return Elem or Null if no element exists at the given index
      */
     public X get(int index){
         if(start == null) return null;

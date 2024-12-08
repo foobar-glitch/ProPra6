@@ -16,13 +16,21 @@ public class RoomLinkedMap {
         this.value = null;
     }
 
-    public RoomLinkedMap(String key, Room value) {
+    /**
+     * Creates new "Node" of this with given key and value
+     * @param key key!=null
+     * @param value value!=null
+     */
+    private RoomLinkedMap(String key, Room value) {
         this.next = null;
         this.key = key;
         this.value = value;
     }
 
-    public RoomLinkedMap getNext() {
+    /**
+     * @return Next Node of this Or Null if this is last element
+     */
+    private RoomLinkedMap getNext() {
         return next;
     };
 
@@ -30,7 +38,7 @@ public class RoomLinkedMap {
     /**
      * Iteratively search for room for a given key
      *
-     * @param roomName name of room to look up
+     * @param roomName roomName!=null, name of room to look up
      * @return Room containing the key; null if no room with the key is not found
      */
     public Room get(String roomName){
@@ -47,8 +55,8 @@ public class RoomLinkedMap {
     /**
      * Search for room and overwrite it if the key is unused write at the end
      *
-     * @param roomName Name of the room which is the key of the dictionary
-     * @param room Room which is the value of the dictionary
+     * @param roomName roomName!=null, Name of the room which is the key of the dictionary
+     * @param room Room !=null, Room which is the value of the dictionary
      */
     public RoomLinkedMap insertPair(String roomName, Room room) {
         // When room exists, overwrite
@@ -81,8 +89,8 @@ public class RoomLinkedMap {
     /**
      * adds mapping to this LinkedMap structure
      *
-     * @param key key of key-value pair to add
-     * @param newValue value of key-value pair to add
+     * @param key key!=null, key of key-value pair to add
+     * @param newValue newValue!=null, value of key-value pair to add
      * @return null if key was not already included; otherwise old value assigned to the key
      */
     public Room put(String key, Room newValue) {
@@ -101,7 +109,8 @@ public class RoomLinkedMap {
 
         RoomLinkedMap tmp = this;
         while(tmp!=null){
-            result.add(tmp.getValue());
+            if(tmp.getValue() != null)
+                result.add(tmp.getValue());
             tmp = tmp.getNext();
         }
 
@@ -111,7 +120,7 @@ public class RoomLinkedMap {
     /**
      * recursively looks for a node in the LinkedMap containing the key
      *
-     * @param key key to look up
+     * @param key key!=null, key to look up
      * @return node containing the key; null if no node with the key is not found
      */
     private RoomLinkedMap findNode(String key) {
@@ -128,7 +137,7 @@ public class RoomLinkedMap {
     /**
      * removes mapping from this LinkedMap structure (sets key and value to null -> sets Node to empty)
      *
-     * @param key key of key-value pair to add
+     * @param key key!=null, key of key-value pair to add
      * @return null if key could not be found; otherwise old value assigned to the key
      */
     public Room remove(String key) {
