@@ -58,13 +58,16 @@ public class OfficeGen<K, V extends RoomGen<K, V>> implements ContainerInterface
         int len = 0;
         double result = 0.0;
 
-        Iterator<Room> rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next();
-            if(room.space() instanceof UsableSpace) {
-                result += room.getArea();
+        //Iterator<Room> rooms = this.rooms.getValues();
+        LinkedMapGen<K, V> current = rooms;
+        while(current != null){
+            //Room room = rooms.next();
+            V roomValue = rooms.getValue();
+            if(roomValue.getValue() instanceof UsableSpace) {
+                result += roomValue.getArea();
                 len++;
             }
+            current = current.getNext();
         }
 
         if(len == 0) return 0;
