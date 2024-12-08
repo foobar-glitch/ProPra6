@@ -1,8 +1,8 @@
 public class Office implements ContainerInterface<Integer>{
     private final int id;
-    private final LinkedMapGen<String, Room> rooms;
+    private final LinkedMap rooms;
 
-    public Office(int id, LinkedMapGen<String, Room> rooms) {
+    public Office(int id, LinkedMap rooms) {
         this.id = id;
         this.rooms = rooms;
     }
@@ -13,10 +13,12 @@ public class Office implements ContainerInterface<Integer>{
 
     public double getAreaOfAdjacentRooms() {
         double areaSideRooms = 0.0;
-        Iterator<Room> rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next();
+        //Iterator<Room> rooms = this.rooms.getValues();
+        LinkedMap current = rooms;
+        while(current != null){
+            Room room = rooms.getValue();
             if(! (room.space() instanceof UsableSpace) ) areaSideRooms+=room.getArea();
+            current = current.getNext();
         }
         return areaSideRooms;
     }
