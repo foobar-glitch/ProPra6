@@ -82,31 +82,20 @@ public class Test {
         BuildingGen testGenBuilding2_Asia = new BuildingGen("Example Inc. Asia");
         // Test add Office
         testGenBuilding2_Asia.add(testGenOffice4);
-        // Test change Office Buildings (add and remove)
+        // Test change Office Buildings (add and remove Offices)
         testGenBuilding2_Asia.add(testGenBuilding1_HQ.getOffice(3));
         testGenBuilding1_HQ.removeOffice(3);
         testGenBuilding2_Asia.removeOffice(3);
-        // Test change Offices (add and remove)
-        testGenBuilding1_HQ.getOffice(2).add()
-
-
-
-
-
-
-        LinkedMapGen<String, Room> map = new LinkedMapGen<>();
-        Room Wichtelraum = new WindowRoom(
-                "Wichtelraum",
-                250,
-                250,
-                75,
-                new WorkSpace(20)
-        );
-        map.put(Wichtelraum.getName(), Wichtelraum);
-        Office office = new Office(5, map);
-        office.print();
-
-
+        // Test change Offices (add and remove Rooms)
+        testGenBuilding1_HQ.getOffice(1).addRoom("Conference Room 2",testGenBuilding1_HQ.getOffice(2).getRoom("Conference Room 2"));
+        testGenBuilding1_HQ.getOffice(2).removeRoom("Conference Room 2");
+        testGenBuilding1_HQ.getOffice(2).addRoom("Accounting",testGenBuilding1_HQ.getOffice(1).getRoom("Accounting"));
+        testGenBuilding1_HQ.getOffice(1).removeRoom("Accounting");
+        // Test change usage for Rooms
+        testGenBuilding1_HQ.getOffice(2).getRoom("Office Materials").setSpace(new WorkSpace(2));
+        testGenBuilding1_HQ.getOffice(2).getRoom("Conference Room 1").setSpace(new StorageSpace(100));
+        // Test output all statistics
+        testGenCompany_ExInc.print();
     }
 
 
