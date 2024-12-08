@@ -102,7 +102,7 @@ public class Test {
         }
 
 
-        // Test add to Company
+        // Test add Buildings to Company
         testGenCompany_ExInc.add(testGenBuilding_HQ);
         if (testGenCompany_ExInc.getBuilding("Example Inc. Headquarters") != null) {
             System.out.println("Building 'Example Inc. Headquarters' successfully added to Company 'Example Inc.'");
@@ -294,7 +294,7 @@ public class Test {
         }
 
 
-        // Test add to Company
+        // Test add Buildings to Company
         testCompany_ExInc.add(testBuilding_HQ);
         if (testCompany_ExInc.getBuilding("Example Inc. Headquarters") != null) {
             System.out.println("Building 'Example Inc. Headquarters' successfully added to Company 'Example Inc.'");

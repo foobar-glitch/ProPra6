@@ -42,12 +42,12 @@ public class RoomLinkedMap {
      * @return Room containing the key; null if no room with the key is not found
      */
     public Room get(String roomName){
-        for(RoomLinkedMap current = next; current != null; current = current.getNext()){
-            if(current.key.equals(roomName)){
-                return current.getValue();
-            }
+        RoomLinkedMap nodeWithKey = findNode(roomName);
+        if (nodeWithKey != null) {
+            return nodeWithKey.value;
+        } else {
+            return null;
         }
-        return null;
     }
 
 
@@ -64,9 +64,9 @@ public class RoomLinkedMap {
             this.value = room;
         } else {
             if (next != null) {
-                next.insertPair(key, value);
+                next.insertPair(roomName, room);
             } else {
-                next = new RoomLinkedMap(key, value);
+                next = new RoomLinkedMap(roomName, room);
             }
         }
     }

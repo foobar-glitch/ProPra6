@@ -42,15 +42,13 @@ public class BuildingLinkedMap {
      * @return Building containing the key; null if no building with the key is not found
      */
     public Building get(String key){
-        for(BuildingLinkedMap current = next; current != null; current = current.getNext()){
-            if(current.key.equals(key)){
-                return current.getValue();
-            }
+        BuildingLinkedMap nodeWithKey = findNode(key);
+        if (nodeWithKey != null) {
+            return nodeWithKey.value;
+        } else {
+            return null;
         }
-        return null;
     }
-
-
 
     /**
      * Search for Building and overwrite it if the key is unused write at the end
@@ -64,9 +62,9 @@ public class BuildingLinkedMap {
             this.value = building;
         } else {
             if (next != null) {
-                next.insertPair(key, value);
+                next.insertPair(id, building);
             } else {
-                next = new BuildingLinkedMap(key, value);
+                next = new BuildingLinkedMap(id, building);
             }
         }
     }
@@ -109,6 +107,9 @@ public class BuildingLinkedMap {
      * @return node containing the key; null if no node with the key is not found
      */
     private BuildingLinkedMap findNode(String key) {
+        if (this.key == null) {
+            return null;
+        }
         if (this.key.equals(key)) {
             return this;
         }

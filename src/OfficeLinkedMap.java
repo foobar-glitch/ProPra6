@@ -43,12 +43,12 @@ public class OfficeLinkedMap {
      * @return Office containing the key; null if no office with the key is not found
      */
     public Office get(int key){
-        for(OfficeLinkedMap current = next; current != null; current = current.getNext()){
-            if(current.key == key){
-                return current.getValue();
-            }
+        OfficeLinkedMap nodeWithKey = findNode(key);
+        if (nodeWithKey != null) {
+            return nodeWithKey.value;
+        } else {
+            return null;
         }
-        return null;
     }
 
 
@@ -59,28 +59,17 @@ public class OfficeLinkedMap {
      * @param id ID of the office which is the key of the dictionary
      * @param office office which is the value of the dictionary
      */
-    public OfficeLinkedMap insertPair(int id, Office office) {
-
-        OfficeLinkedMap current = this;
-
-        while (current != null) {
-            if (current.key == id) {
-                current.value = office;
-                return current;
+    public void insertPair(int id, Office office) {
+        if ((this.key == -1 && this.value == null) || (this.key != -1 && this.key == id)) {
+            this.key = id;
+            this.value = office;
+        } else {
+            if (next != null) {
+                next.insertPair(id, office);
+            } else {
+                next = new OfficeLinkedMap(id, office);
             }
-            current = current.getNext();
         }
-
-        OfficeLinkedMap lastNode = this;
-        while (lastNode.getNext() != null) {
-            lastNode = lastNode.getNext();
-        }
-
-        // Now append the new node
-        lastNode.next = new OfficeLinkedMap(id, office);
-
-        // Return the newly added node
-        return lastNode.getNext(); // Return the newly appended node
     }
 
     /**
@@ -120,6 +109,9 @@ public class OfficeLinkedMap {
      * @return node containing the key; null if no node with the key is not found
      */
     private OfficeLinkedMap findNode(int key) {
+        if (this.key == -1) {
+            return null;
+        }
         if (this.key == key) {
             return this;
         }
