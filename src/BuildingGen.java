@@ -9,13 +9,10 @@ public class BuildingGen extends ContainerGen<Integer, OfficeGen<String, Room>> 
         String allOneString = "Building: " + super.getName();
         allOneString = allOneString.concat("\n-------------------------");
         IteratorGen<OfficeGen<String, Room>> elems = super.map().getValues();
-        System.out.println("-------------------------");
         while(elems.hasNext()){
-            System.out.println("\t" + elems.next().toString());
+            allOneString = allOneString.concat("\n" + elems.next().toString());
         }
-
-        return allOneString;
-
+        return allOneString.replace("\n", "\n\t");
     }
 
     @Override
