@@ -1,11 +1,10 @@
-// TODO Aufgabenteilung:
 // TODO Division durch 0 testen
 
 /*
     Wer was gemacht hat:
     Julian - Struktur, Alle NodeListen und Iterator, Space und Space Klassen, Kommentare, Nicht generische LinkedMaps, ContainerInterface und ContainerGen, Statistische Methoden in Office
     Hamed - WindowRoom, WindowlessRoom
-    Marian -
+    Marian - Test, LinkedMapGen, CompanyGen, BuildingGen, OfficeGen, RoomGen, Room Interface
  */
 
 public class Test {
