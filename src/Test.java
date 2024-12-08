@@ -97,7 +97,4 @@ public class Test {
         // Test output all statistics
         testGenCompany_ExInc.print();
     }
-
-
-
 }
