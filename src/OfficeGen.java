@@ -45,10 +45,10 @@ public class OfficeGen<K, V extends RoomGen<K, V>> implements ContainerInterface
      *              this.changeRoomUsage(space2)
      *              => Now, RoomUsage is changed from WorkSpace to Storage
      */
-    public void changeRoomUsage (Room room, Space space) {
-        Room tmp = rooms.get(room.getName());
+    public void changeRoomUsage (V roomValue, V newRoomValue) {
+        V tmp = rooms.get(roomValue.getName());
         if (tmp != null) {
-            tmp.setSpace(space);
+            tmp.setValue(newRoomValue);
         }
     }
 

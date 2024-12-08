@@ -5,5 +5,5 @@ public interface RoomGen<K, V> {
     double getArea();
 
     V getValue();
-    void setValue(V room);
+    void setValue(V value);
 }
