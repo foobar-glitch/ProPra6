@@ -8,7 +8,7 @@ public class Building extends ContainerGen<Integer, Office> implements Container
     public void print(){
 
         LinkedMapGen<Integer, Office> map = this.map();
-        Iterator<Office> offices = map.getValues();
+        IteratorGen<Office> offices = map.getValues();
         System.out.println("Offices");
 
         int i=0;

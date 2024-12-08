@@ -12,7 +12,7 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
 
     public double getAreaOfAdjacentRooms() {
         double areaSideRooms = 0.0;
-        Iterator<V> rooms = this.rooms.getValues();
+        IteratorGen<V> rooms = this.rooms.getValues();
         while(rooms.hasNext()){
             Room room = rooms.next();
             if(! (room.space() instanceof UsableSpace) ) areaSideRooms+=room.getArea();

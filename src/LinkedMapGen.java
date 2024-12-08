@@ -118,7 +118,7 @@ public class LinkedMapGen<K, V> {
     /**
      * @return Iterator over all values V inside this
      */
-    public Iterator<V> getValues(){return valueList().iterator();}
+    public IteratorGen<V> getValues(){return valueList().iterator();}
 
     /**
      * @return NodeList elem, containing all keys in this
@@ -140,7 +140,7 @@ public class LinkedMapGen<K, V> {
     /**
      * @return Iterator over all keys K inside this
      */
-    public Iterator<K> getKeys(){return keyList().iterator();}
+    public IteratorGen<K> getKeys(){return keyList().iterator();}
 
     /**
      * removes mapping from this LinkedMap structure (sets key and value to null -> sets Node to empty)
