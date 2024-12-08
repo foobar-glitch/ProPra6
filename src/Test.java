@@ -1,4 +1,5 @@
 // TODO Aufgabenteilung:
+// TODO Division durch 0 testen
 
 /*
     Wer was gemacht hat:
@@ -67,41 +68,152 @@ public class Test {
         roomsGenOffice4.put(testGenRoom_OA.getName(), testGenRoom_OA);
         // Storage for Office Materials
         roomsGenOffice4.put(testGenRoom_OM.getName(), testGenRoom_OM);
+        // contains Office Asia and Office Materials
         OfficeGen<String, Room> testGenOffice4 = new OfficeGen<String, Room>(4, roomsGenOffice4);
 
+        System.out.println();
+        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("\t\t\t\t\t\t\t\tTesting for generic");
+        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println();
+
+        // Test create Company
+        CompanyGen testGenCompany_ExInc = new CompanyGen("Example Inc.");
+        if (testGenCompany_ExInc != null && testGenCompany_ExInc.getName().equals("Example Inc.")) {
+            System.out.println("Company 'Example Inc.' successfully created");
+        } else {
+            System.out.println("ERROR: issue with creating Company 'Example Inc.'");
+        }
 
         // Test create first Office Building
         BuildingGen testGenBuilding_HQ = new BuildingGen("Example Inc. Headquarters");
+        if (testGenBuilding_HQ != null && testGenBuilding_HQ.getName().equals("Example Inc. Headquarters")) {
+            System.out.println("Building 'Example Inc. Headquarters' successfully created");
+        } else {
+            System.out.println("ERROR: issue with creating Building 'Example Inc. Headquarters'");
+        }
+
         // Test create second Office Building
         BuildingGen testGenBuilding_Asia = new BuildingGen("Example Inc. Asia");
-        // Test create Company
-        CompanyGen testGenCompany_ExInc = new CompanyGen("Example Inc.");
+        if (testGenBuilding_HQ != null && testGenBuilding_Asia.getName().equals("Example Inc. Asia")) {
+            System.out.println("Building 'Example Inc. Asia' successfully created");
+        } else {
+            System.out.println("ERROR: issue with creating Building 'Example Inc. Asia'");
+        }
+
+
         // Test add to Company
         testGenCompany_ExInc.add(testGenBuilding_HQ);
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Headquarters") != null) {
+            System.out.println("Building 'Example Inc. Headquarters' successfully added to Company 'Example Inc.'");
+        } else {
+            System.out.println("ERROR: issue with adding Building 'Example Inc. Headquarters' to Company 'Example Inc.'");
+        }
         testGenCompany_ExInc.add(testGenBuilding_Asia);
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Asia") != null) {
+            System.out.println("Building 'Example Inc. Asia' successfully added to Company 'Example Inc.'");
+        } else {
+            System.out.println("ERROR: issue with adding Building 'Example Inc. Asia' to Company 'Example Inc.'");
+        }
+
         // Test add Offices
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").add(testGenOffice1);
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1) != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Accounting") != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Conference Room 1") != null) {
+            System.out.println("Office 'Office 1' successfully added to Building 'Example Inc. Headquarters'");
+        } else {
+            System.out.println("ERROR: issue with adding Office 'Office 1' to Building 'Example Inc. Headquarters'");
+        }
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").add(testGenOffice2);
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2) != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).getRoom("Conference Room 2") != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).getRoom("Archive") != null) {
+            System.out.println("Office 'Office 2' successfully added to Building 'Example Inc. HQ'");
+        } else {
+            System.out.println("ERROR: issue with adding Office 'Office 2' to Building 'Example Inc. Headquarters'");
+        }
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").add(testGenOffice3);
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(3) != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(3).getRoom("Cafeteria") != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(3).getRoom("Technical Equipment") != null) {
+            System.out.println("Office 'Office 3' successfully added to Building 'Example Inc. HQ'");
+        } else {
+            System.out.println("ERROR: issue with adding Office 'Office 3' to Building 'Example Inc. Headquarters'");
+        }
+
         // Test add to second Office Building
-        // Test add Office
         testGenCompany_ExInc.getBuilding("Example Inc. Asia").add(testGenOffice4);
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4) != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4).getRoom("Office Asia") != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4).getRoom("Office Materials") != null) {
+            System.out.println("Office 'Office 4' successfully added to Building 'Example Inc. Asia'");
+        } else {
+            System.out.println("ERROR: issue with adding Office 'Office 3' to Building 'Example Inc. Asia'");
+        }
+
         // Test change Office Buildings (add and remove Offices)
         testGenCompany_ExInc.getBuilding("Example Inc. Asia").add(testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(3));
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").removeOffice(3);
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(3) != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(3) == null) {
+            System.out.println("Office 'Office 3' successfully moved from Building 'Example Inc. Headquarters' to Building 'Example Inc. Asia'");
+        } else {
+            System.out.println("ERROR: issue with moving Office 'Office 3' from Building 'Example Inc. Headquarters' to Building 'Example Inc. Asia'");
+        }
         testGenCompany_ExInc.getBuilding("Example Inc. Asia").removeOffice(3);
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(3) == null) {
+            System.out.println("Office 'Office 3' successfully removed from Building 'Example Inc. Asia'");
+        } else {
+            System.out.println("ERROR: issue with moving Office 'Office 3' from Building 'Example Inc. Headquarters' to 'Example Inc. Asia'");
+        }
+
         // Test change Offices (add and remove Rooms)
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).addRoom("Conference Room 2", testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).getRoom("Conference Room 2"));
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).removeRoom("Conference Room 2");
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Conference Room 2") != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).getRoom("Conference Room 2") == null) {
+            System.out.println("Room 'Conference Room 2' successfully moved from Office 'Office 2' to Office 'Office 1'");
+        } else {
+            System.out.println("ERROR: issue with moving Room 'Conference Room 2' from Office 'Office 2' to Office 'Office 1'");
+        }
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).addRoom("Accounting",testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Accounting"));
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).removeRoom("Accounting");
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).getRoom("Accounting") != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Accounting") == null) {
+            System.out.println("Room 'Accounting' successfully moved from Office 'Office 1' to Office 'Office 2'");
+        } else {
+            System.out.println("ERROR: issue with moving Room 'Accounting' from Office 'Office 1' to Office 'Office 2'");
+        }
         testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4).addRoom("Accounting",testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).getRoom("Accounting"));
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).removeRoom("Accounting");
+        if (testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4).getRoom("Accounting") != null &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(2).getRoom("Accounting") == null) {
+            System.out.println("Room 'Accounting' successfully moved from Office 'Office 2' in Building 'Example Inc. Headquarters' to Office 'Office 4' in Building 'Example Inc. Asia'");
+        } else {
+            System.out.println("ERROR: issue with moving Room 'Accounting' from Office 'Office 2' in Building 'Example Inc. Headquarters' to 'Office 4' in Building 'Example Inc. Asia'");
+        }
+
         // Test change usage for Rooms
+        Space oldSpaceCF1 = testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Conference Room 1").space();
         testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Conference Room 1").setSpace(new StorageSpace(100));
+        if (oldSpaceCF1 instanceof WorkSpace &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Headquarters").getOffice(1).getRoom("Conference Room 1").space() instanceof StorageSpace) {
+            System.out.println("Room 'Conference Room 1' successfully changed its usage from 'WorkSpace' to 'StorageSpace'");
+        } else {
+            System.out.println("ERROR: issue with changing usage of Room 'Conference Room 1' from 'WorkSpace' to 'StorageSpace'");
+        }
+        Space oldSpaceOM = testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4).getRoom("Office Materials").space();
         testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4).getRoom("Office Materials").setSpace(new WorkSpace(2));
+        if (oldSpaceOM instanceof StorageSpace &&
+                testGenCompany_ExInc.getBuilding("Example Inc. Asia").getOffice(4).getRoom("Office Materials").space() instanceof WorkSpace) {
+            System.out.println("Room 'Office Materials' successfully changed its usage from 'StorageSpace' to 'WorkSpace'");
+        } else {
+            System.out.println("ERROR: issue with changing usage of Room 'Office Materials' from 'StorageSpace' to 'WorkSpace'");
+        }
+
         // Test output all statistics
-        LinkedMapGen<String, BuildingGen> sanityTest = testGenCompany_ExInc.map();
+        System.out.println();
         testGenCompany_ExInc.print();
     }
 }
