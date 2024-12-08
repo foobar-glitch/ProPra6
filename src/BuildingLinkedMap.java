@@ -16,22 +16,30 @@ public class BuildingLinkedMap {
         this.value = null;
     }
 
+    /**
+     * Creates new "Node" of this with given key and value
+     * @param key key!=null
+     * @param value value!=null
+     */
     private BuildingLinkedMap(String key, Building value) {
         this.next = null;
         this.key = key;
         this.value = value;
     }
 
+    /**
+     * @return Next Node of this Or Null if this is last element
+     */
     private BuildingLinkedMap getNext() {
         return next;
     };
 
 
     /**
-     * Iteratively search for room for a given key
+     * Iteratively search for building for a given key
      *
-     * @param roomName name of room to look up
-     * @return Room containing the key; null if no room with the key is not found
+     * @param key key!=null, name of building to look up
+     * @return Building containing the key; null if no building with the key is not found
      */
     public Building get(String key){
         for(BuildingLinkedMap current = next; current != null; current = current.getNext()){
@@ -45,27 +53,24 @@ public class BuildingLinkedMap {
 
 
     /**
-     * Search for room and overwrite it if the key is unused write at the end
+     * Search for Building and overwrite it if the key is unused write at the end
      *
-     * @param roomName Name of the room which is the key of the dictionary
-     * @param room Room which is the value of the dictionary
+     * @param id id!=null, Name of the building which is the key of the dictionary
+     * @param building building!=null, Building which is the value of the dictionary
      */
     private BuildingLinkedMap insertPair(String id, Building building) {
-        // When room exists, overwrite
+
         BuildingLinkedMap current = this;
 
-        // Traverse the list to check if the room already exists
         while (current != null) {
             if (current.key.equals(id)) {
-                // If roomName exists, overwrite the value
                 current.value = building;
                 return current;
             }
             current = current.getNext();
         }
 
-        // If the roomName doesn't exist, append a new node to the end
-        // Traverse to the last node
+
         BuildingLinkedMap lastNode = this;
         while (lastNode.getNext() != null) {
             lastNode = lastNode.getNext();
@@ -81,8 +86,8 @@ public class BuildingLinkedMap {
     /**
      * adds mapping to this LinkedMap structure
      *
-     * @param key key of key-value pair to add
-     * @param newValue value of key-value pair to add
+     * @param key key!=null, key of key-value pair to add
+     * @param newValue newValue!=null, value of key-value pair to add
      * @return null if key was not already included; otherwise old value assigned to the key
      */
     public Building put(String key, Building newValue) {
@@ -101,7 +106,8 @@ public class BuildingLinkedMap {
 
         BuildingLinkedMap tmp = this;
         while(tmp!=null){
-            result.add(tmp.getValue());
+            if(tmp.getValue() != null)
+                result.add(tmp.getValue());
             tmp = tmp.getNext();
         }
 
@@ -111,7 +117,7 @@ public class BuildingLinkedMap {
     /**
      * recursively looks for a node in the LinkedMap containing the key
      *
-     * @param key key to look up
+     * @param key key!=null, key to look up
      * @return node containing the key; null if no node with the key is not found
      */
     private BuildingLinkedMap findNode(String key) {
@@ -128,7 +134,7 @@ public class BuildingLinkedMap {
     /**
      * removes mapping from this LinkedMap structure (sets key and value to null -> sets Node to empty)
      *
-     * @param key key of key-value pair to add
+     * @param key key!=null, key of key-value pair to add
      * @return null if key could not be found; otherwise old value assigned to the key
      */
     public Building remove(String key) {
@@ -142,7 +148,7 @@ public class BuildingLinkedMap {
     }
 
     /**
-     * @return Iterator over all values V inside this
+     * @return Iterator over all values inside this
      */
     public BuildingNodeListIterator getValues(){return valueList().iterator();}
 }

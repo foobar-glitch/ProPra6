@@ -17,22 +17,30 @@ public class OfficeLinkedMap {
         this.value = null;
     }
 
+    /**
+     * Creates new "Node" of this with given key and value
+     * @param key key!=null
+     * @param value value!=null
+     */
     private OfficeLinkedMap(int key, Office value) {
         this.next = null;
         this.key = key;
         this.value = value;
     }
 
+    /**
+     * @return Next Node of this Or Null if this is last element
+     */
     public OfficeLinkedMap getNext() {
         return next;
     };
 
 
     /**
-     * Iteratively search for room for a given key
+     * Iteratively search for Office for a given key
      *
-     * @param roomName name of room to look up
-     * @return Room containing the key; null if no room with the key is not found
+     * @param key ID of Office
+     * @return Office containing the key; null if no office with the key is not found
      */
     public Office get(int key){
         for(OfficeLinkedMap current = next; current != null; current = current.getNext()){
@@ -46,27 +54,23 @@ public class OfficeLinkedMap {
 
 
     /**
-     * Search for room and overwrite it if the key is unused write at the end
+     * Search for office and overwrite it if the key is unused write at the end
      *
-     * @param roomName Name of the room which is the key of the dictionary
-     * @param room Room which is the value of the dictionary
+     * @param id ID of the office which is the key of the dictionary
+     * @param office office which is the value of the dictionary
      */
     public OfficeLinkedMap insertPair(int id, Office office) {
-        // When room exists, overwrite
+
         OfficeLinkedMap current = this;
 
-        // Traverse the list to check if the room already exists
         while (current != null) {
             if (current.key == id) {
-                // If roomName exists, overwrite the value
                 current.value = office;
                 return current;
             }
             current = current.getNext();
         }
 
-        // If the roomName doesn't exist, append a new node to the end
-        // Traverse to the last node
         OfficeLinkedMap lastNode = this;
         while (lastNode.getNext() != null) {
             lastNode = lastNode.getNext();
@@ -82,8 +86,8 @@ public class OfficeLinkedMap {
     /**
      * adds mapping to this LinkedMap structure
      *
-     * @param key key of key-value pair to add
-     * @param newValue value of key-value pair to add
+     * @param key key!=null, key of key-value pair to add
+     * @param newValue newValue!=null, value of key-value pair to add
      * @return null if key was not already included; otherwise old value assigned to the key
      */
     public Office put(int key, Office newValue) {
@@ -112,7 +116,7 @@ public class OfficeLinkedMap {
     /**
      * recursively looks for a node in the LinkedMap containing the key
      *
-     * @param key key to look up
+     * @param key key!=null, key to look up
      * @return node containing the key; null if no node with the key is not found
      */
     private OfficeLinkedMap findNode(int key) {
@@ -129,7 +133,7 @@ public class OfficeLinkedMap {
     /**
      * removes mapping from this LinkedMap structure (sets key and value to null -> sets Node to empty)
      *
-     * @param key key of key-value pair to add
+     * @param key key!=null, key of key-value pair to add
      * @return null if key could not be found; otherwise old value assigned to the key
      */
     public Office remove(int key) {
@@ -143,7 +147,7 @@ public class OfficeLinkedMap {
     }
 
     /**
-     * @return Iterator over all values V inside this
+     * @return Iterator over all values inside this
      */
     public OfficeNodeListIterator getValues(){return valueList().iterator();}
 

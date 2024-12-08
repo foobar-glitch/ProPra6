@@ -3,6 +3,14 @@ public class WindowRoom implements Room {
     private final double length, width, windowArea;
     private Space space;
 
+    /**
+     * Creates new Room with Window(s)
+     * @param name name!=null, unique name of the Room
+     * @param length length of the room (in meter)
+     * @param width width of the room (in meter)
+     * @param windowArea area of window (in m^2)
+     * @param space space!=null, Element containing the Usage of the room (f.ex. StorageSpace f. Storage)
+     */
     public WindowRoom(String name, double length, double width, double windowArea, Space space) {
         this.name = name;
         this.length = length;
@@ -33,5 +41,8 @@ public class WindowRoom implements Room {
         this.space = space;
     }
 
+    /**
+     * @return WindowArea of this room (in m^2)
+     */
     public double getWindowArea() { return windowArea; }
 }
