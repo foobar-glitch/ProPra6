@@ -41,11 +41,10 @@ public class Office implements ContainerInterface<Integer>{
 
     }
 
-    public boolean removeRoom(Room room) {
-        String roomId = room.getName();
-
-        if(rooms.get(roomId) == null) return false;
-        rooms.remove(roomId);
+    // for testing
+    public boolean removeRoom(String name) {
+        if(rooms.get(name) == null) return false;
+        rooms.remove(name);
         return true;
     }
 
@@ -278,5 +277,9 @@ public class Office implements ContainerInterface<Integer>{
         ;
         result+="\n";
         return result;
+    }
+
+    public Room getRoom(String name) {
+        return rooms.get(name);
     }
 }

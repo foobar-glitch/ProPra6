@@ -59,4 +59,8 @@ public class Company implements StringContainerInterface{
     @Override
     public String id(){return this.getName();}
 
+    // for testing
+    public Building getBuilding(String name) {
+        return map.get(name);
+    }
 }

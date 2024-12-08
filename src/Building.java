@@ -62,4 +62,8 @@ public class Building implements StringContainerInterface{
         return this.getName();
     }
 
+    // for testing
+    public Office getOffice(int id) {
+        return map.get(id);
+    }
 }
