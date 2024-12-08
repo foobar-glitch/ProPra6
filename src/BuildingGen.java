@@ -10,7 +10,7 @@ public class BuildingGen extends ContainerGen<Integer, OfficeGen<String, Room>> 
         allOneString = allOneString.concat("\n-------------------------");
         IteratorGen<OfficeGen<String, Room>> elems = super.map().getValues();
         while(elems.hasNext()){
-            allOneString = allOneString.concat("\n" + elems.next().toString());
+            allOneString = allOneString.concat("\n\t" + elems.next().toString());
         }
         return allOneString.replace("\n", "\n\t");
     }
