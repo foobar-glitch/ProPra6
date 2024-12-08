@@ -30,6 +30,14 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
     public void print() {
 
     }
+
+    public Room getOffice(K identifier) {
+        return rooms.get(identifier);
+    }
+
+    public void removeOffice(K identifier) {
+        rooms.remove(identifier);
+    }
 }
 
 

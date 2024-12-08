@@ -23,7 +23,8 @@ public class Test {
 
     public static void main(String[] args) {
 
-
+        //                                      Test Gen
+        // Create Objects used in Testing
         Room testGenRoom_Acc = new WindowRoom("Accounting", 125, 75, 2000, new WorkSpace(650));
         Room testGenRoom_CR1 = new WindowRoom("Conference Room 1", 6, 18, 25, new WorkSpace(12));
         Room testGenRoom_CR2 = new WindowRoom("Conference Room 2", 15, 25, 40, new WorkSpace(200));
@@ -31,9 +32,10 @@ public class Test {
         Room testGenRoom_Arc = new WindowlessRoom("Archive", 15, 25, 350, new StorageSpace(350));
         Room testGenRoom_TE = new WindowRoom("Technical Equipment", 10, 2, 6, new StorageSpace(10));
         Room testGenRoom_OM = new WindowRoom("Office Materials", 5, 6, 8, new StorageSpace(30));
-        BuildingGen testGenBuilding2_Asia = new BuildingGen("Example Inc. Asia");
+        Room testGenRoom_OA = new WindowRoom("Office Asia", 50, 12, 230, new WorkSpace(250));
 
-        //                                      Office1
+
+        // Office1
         LinkedMapGen<String, Room> roomsGenOffice1 = new LinkedMapGen<String, Room>();
         // Accounting
         roomsGenOffice1.put(testGenRoom_Acc.getName(), testGenRoom_Acc);
@@ -42,36 +44,52 @@ public class Test {
         // contains Accounting and Conference Room 1
         OfficeGen<String, Room> testGenOffice1 = new OfficeGen<String, Room>(1, roomsGenOffice1);
 
-        //                                      Office2
+        // Office2
         LinkedMapGen<String, Room> roomsGenOffice2 = new LinkedMapGen<String, Room>();
         // Conference Room 2
         roomsGenOffice2.put(testGenRoom_Arc.getName(), testGenRoom_CR2);
         // Archive
         roomsGenOffice2.put(testGenRoom_Arc.getName(), testGenRoom_Arc);
         // contains Conference Room 2 and Archive
-        OfficeGen<String, Room> testGenOffice2 = new OfficeGen<String, Room>(1, roomsGenOffice2);
+        OfficeGen<String, Room> testGenOffice2 = new OfficeGen<String, Room>(2, roomsGenOffice2);
 
-        //                                      Office3
+        // Office3
         LinkedMapGen<String, Room> roomsGenOffice3 = new LinkedMapGen<String, Room>();
         // Cafeteria
         roomsGenOffice3.put(testGenRoom_Arc.getName(), testGenRoom_Caf);
         // Storage for Technical Equipment
         roomsGenOffice3.put(testGenRoom_Arc.getName(), testGenRoom_TE);
         // contains Cafeteria and Technical Equipment
-        OfficeGen<String, Room> testGenOffice3 = new OfficeGen<String, Room>(1, roomsGenOffice3);
+        OfficeGen<String, Room> testGenOffice3 = new OfficeGen<String, Room>(3, roomsGenOffice3);
 
-        //                                      Office4
+        // Office4
         LinkedMapGen<String, Room> roomsGenOffice4 = new LinkedMapGen<String, Room>();
-
-        // TODO add Office Materials and create and add office Asia oder so
-
-
-        OfficeGen<String, Room> testGenOffice4 = new OfficeGen<String, Room>(1, roomsGenOffice4);
+        // Office Asia
+        roomsGenOffice4.put(testGenRoom_OA.getName(), testGenRoom_OA);
+        // Storage for Office Materials
+        roomsGenOffice4.put(testGenRoom_OM.getName(), testGenRoom_OM);
+        OfficeGen<String, Room> testGenOffice4 = new OfficeGen<String, Room>(4, roomsGenOffice4);
 
         // Test create Company
         CompanyGen testGenCompany_ExInc = new CompanyGen("Example Inc.");
         // Test create first Office Building
         BuildingGen testGenBuilding1_HQ = new BuildingGen("Example Inc. Headquarters");
+        // Test add Offices
+        testGenBuilding1_HQ.add(testGenOffice1);
+        testGenBuilding1_HQ.add(testGenOffice2);
+        testGenBuilding1_HQ.add(testGenOffice3);
+        // Test create second Office Buildings
+        BuildingGen testGenBuilding2_Asia = new BuildingGen("Example Inc. Asia");
+        // Test add Office
+        testGenBuilding2_Asia.add(testGenOffice4);
+        // Test change Office Buildings (add and remove)
+        testGenBuilding2_Asia.add(testGenBuilding1_HQ.getOffice(3));
+        testGenBuilding1_HQ.removeOffice(3);
+        testGenBuilding2_Asia.removeOffice(3);
+        // Test change Offices (add and remove)
+        testGenBuilding1_HQ.getOffice(1).
+
+
 
 
 
