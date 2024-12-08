@@ -91,11 +91,11 @@ public class Test {
         testGenBuilding1_HQ.getOffice(2).removeRoom("Conference Room 2");
         testGenBuilding1_HQ.getOffice(2).addRoom("Accounting",testGenBuilding1_HQ.getOffice(1).getRoom("Accounting"));
         testGenBuilding1_HQ.getOffice(1).removeRoom("Accounting");
-        testGenBuilding2_Asia.getOffice(4).addRoom("Accounting",testGenBuilding1_HQ.getOffice(1).getRoom("Accounting"));
-
+        testGenBuilding2_Asia.getOffice(4).addRoom("Accounting",testGenBuilding1_HQ.getOffice(2).getRoom("Accounting"));
+        testGenBuilding1_HQ.getOffice(2).removeRoom("Accounting");
         // Test change usage for Rooms
-        testGenBuilding1_HQ.getOffice(2).getRoom("Office Materials").setSpace(new WorkSpace(2));
-        testGenBuilding1_HQ.getOffice(2).getRoom("Conference Room 1").setSpace(new StorageSpace(100));
+        testGenBuilding1_HQ.getOffice(1).getRoom("Conference Room 1").setSpace(new StorageSpace(100));
+        testGenBuilding2_Asia.getOffice(4).getRoom("Office Materials").setSpace(new WorkSpace(2));
         // Test output all statistics
         testGenCompany_ExInc.print();
     }
