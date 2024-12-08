@@ -1,8 +1,8 @@
 public class Office implements ContainerInterface<Integer>{
     private final int id;
-    private final LinkedMapGen<String, Room> rooms;
+    private final LinkedMap rooms;
 
-    public Office(int id, LinkedMapGen<String, Room> rooms) {
+    public Office(int id, LinkedMap rooms) {
         this.id = id;
         this.rooms = rooms;
     }
@@ -13,7 +13,7 @@ public class Office implements ContainerInterface<Integer>{
 
     public double getAreaOfAdjacentRooms() {
         double areaSideRooms = 0.0;
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while(rooms.hasNext()){
             Room room = rooms.next();
             if(! (room.space() instanceof UsableSpace) ) areaSideRooms+=room.getArea();
@@ -23,7 +23,7 @@ public class Office implements ContainerInterface<Integer>{
 
     public double totalArea() {
         double areaTotal = 0.0;
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while(rooms.hasNext()){
             areaTotal+=rooms.next().getArea();
         }
@@ -71,7 +71,7 @@ public class Office implements ContainerInterface<Integer>{
         int len = 0;
         double result = 0.0;
 
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while(rooms.hasNext()){
             Room room = rooms.next();
             if(room.space() instanceof UsableSpace) {
@@ -90,7 +90,7 @@ public class Office implements ContainerInterface<Integer>{
         int len = 0;
         double result = 0.0;
 
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while (rooms.hasNext()){
             Room room = rooms.next();
             if(room.space() instanceof UsableSpace && room instanceof WindowRoom){
@@ -108,7 +108,7 @@ public class Office implements ContainerInterface<Integer>{
         int len = 0;
         double result = 0.0;
 
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while (rooms.hasNext()){
             Room room = rooms.next();
             if(room.space() instanceof UsableSpace && room instanceof WindowlessRoom){
@@ -126,7 +126,7 @@ public class Office implements ContainerInterface<Integer>{
         int len = 0;
         double result = 0.0;
 
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while(rooms.hasNext()){
             Room room = rooms.next();
             if(room.space() instanceof StorageSpace){
@@ -146,7 +146,7 @@ public class Office implements ContainerInterface<Integer>{
         int len=0;
         double result=0.0;
 
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while(rooms.hasNext()){
             Room room = rooms.next();
             if(room.space() instanceof WorkSpace){
@@ -174,7 +174,7 @@ public class Office implements ContainerInterface<Integer>{
         double sWindowArea=0.0;
 
 
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while(rooms.hasNext()){
             Room room = rooms.next();
             Space space = room.space();
@@ -213,7 +213,7 @@ public class Office implements ContainerInterface<Integer>{
         double sWindowArea=0.0;
 
 
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while(rooms.hasNext()){
             Room room = rooms.next();
             Space space = room.space();
@@ -243,7 +243,7 @@ public class Office implements ContainerInterface<Integer>{
      */
     public int[] numberOfSpaces(){
         int[] result = new int[3];
-        IteratorGen<Room> rooms = this.rooms.getValues();
+        Iterator rooms = this.rooms.getValues();
         while(rooms.hasNext()){
             Space space = rooms.next().space();
             if(space instanceof WorkSpace) result[0]++;

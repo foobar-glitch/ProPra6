@@ -33,7 +33,7 @@ public class LinkedMap {
      * @param roomName name of room to look up
      * @return Room containing the key; null if no room with the key is not found
      */
-    public Room findRoom(String roomName){
+    public Room get(String roomName){
         for(LinkedMap current = next; current != null; current = current.getNext()){
             if(current.key.equals(roomName)){
                 return current.getValue();
@@ -77,5 +77,73 @@ public class LinkedMap {
         // Return the newly added node
         return lastNode.getNext(); // Return the newly appended node
     }
+
+    /**
+     * adds mapping to this LinkedMap structure
+     *
+     * @param key key of key-value pair to add
+     * @param newValue value of key-value pair to add
+     * @return null if key was not already included; otherwise old value assigned to the key
+     */
+    public Room put(String key, Room newValue) {
+        Room oldValue = get(key);
+        insertPair(key, newValue);
+        return oldValue;
+    }
+
+    /**
+     * @return NodeList elem, containing all values in this
+     */
+    public NodeList valueList(){
+        NodeList result = new NodeList();
+
+        if(this.key == null && this.next == null) return result;
+
+        LinkedMap tmp = this;
+        while(tmp!=null){
+            result.add(tmp.getValue());
+            tmp = tmp.getNext();
+        }
+
+        return result;
+    }
+
+    /**
+     * recursively looks for a node in the LinkedMap containing the key
+     *
+     * @param key key to look up
+     * @return node containing the key; null if no node with the key is not found
+     */
+    private LinkedMap findNode(String key) {
+        if (this.key != null && this.key.equals(key)) {
+            return this;
+        }
+        if (next != null) {
+            return next.findNode(key);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * removes mapping from this LinkedMap structure (sets key and value to null -> sets Node to empty)
+     *
+     * @param key key of key-value pair to add
+     * @return null if key could not be found; otherwise old value assigned to the key
+     */
+    public Room remove(String key) {
+        Room oldValue = get(key);
+        LinkedMap nodeToRemove = findNode(key);
+        if (nodeToRemove != null) {
+            nodeToRemove.key = null;
+            nodeToRemove.value = null;
+        }
+        return oldValue;
+    }
+
+    /**
+     * @return Iterator over all values V inside this
+     */
+    public Iterator getValues(){return valueList().iterator();}
 
 }
