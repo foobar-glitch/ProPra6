@@ -34,7 +34,6 @@ public class Test {
         Room testGenRoom_OM = new WindowRoom("Office Materials", 5, 6, 8, new StorageSpace(30));
         Room testGenRoom_OA = new WindowRoom("Office Asia", 50, 12, 230, new WorkSpace(250));
 
-
         // Office1
         LinkedMapGen<String, Room> roomsGenOffice1 = new LinkedMapGen<String, Room>();
         // Accounting
