@@ -11,17 +11,17 @@ import java.util.NoSuchElementException;
  */
 public class NodeListGen<X> {
 
-    Node<X> start = null;
+    private Node<X> start = null;
 
     /**
      * Adds elem to NodeList
      * @param elem (elem!=null)
      */
     public void add(X elem){
-        if(start == null){start = new Node<>(elem); return;}
+        if(start == null){start = new Node<X>(elem); return;}
         Node<X> tmp = start;
-        while(tmp.next != null){tmp = tmp.next;}
-        tmp.next = new Node<>(elem);
+        while(tmp.next() != null){tmp = tmp.next();}
+        tmp.setNext(new Node<>(elem));
     }
 
     /**
@@ -33,16 +33,16 @@ public class NodeListGen<X> {
         if(start == null) return false;
         Node<X> tmp = start;
         // Special case if start is removed
-        if(start.value.equals(elem)){start = start.next; return true;}
+        if(start.value().equals(elem)){start = start.next(); return true;}
         // Else
-        while(tmp.next != null){
+        while(tmp.next() != null){
             // If tmp.next equals elem, remove it and fix list
-            if(tmp.next.value.equals(elem)){
-                tmp.next = tmp.next.next;
+            if(tmp.next().value().equals(elem)){
+                tmp.setNext(tmp.next().next());
                 return true;
             }
             // Else go to next Node
-            tmp = tmp.next;
+            tmp = tmp.next();
         }
         return false;
     }
@@ -72,8 +72,8 @@ public class NodeListGen<X> {
         if(start== null) return false;
         Node<X> tmp = start;
         while (tmp != null){
-            if(tmp.value.equals(elem)) return true;
-            tmp = tmp.next;
+            if(tmp.value().equals(elem)) return true;
+            tmp = tmp.next();
         }
         return false;
     }
@@ -89,8 +89,8 @@ public class NodeListGen<X> {
         int i = 0;
         Node<X> tmp = start;
         while (tmp != null){
-            if(i++ == index) return tmp.value;
-            tmp = tmp.next;
+            if(i++ == index) return tmp.value();
+            tmp = tmp.next();
         }
 
         return null;
@@ -105,7 +105,7 @@ public class NodeListGen<X> {
         if(start == null) return len;
 
         Node<X> tmp = start;
-        while(tmp != null){len++; tmp=tmp.next;}
+        while(tmp != null){len++; tmp=tmp.next();}
 
         return len;
     }
@@ -127,47 +127,10 @@ public class NodeListGen<X> {
         StringBuilder stringBuilder = new StringBuilder();
         Node<X> tmp = start;
         while(tmp != null){
-            stringBuilder.append(tmp.value).append(", ");
-            tmp = tmp.next;
+            stringBuilder.append(tmp.value()).append(", ");
+            tmp = tmp.next();
         }
         return "[" + stringBuilder.substring(0, stringBuilder.length()-2) + "]";
     }
 
-}
-
-/**
- * Simple Node Implementation
- * @param <X> Type of Object to be value of Node
- */
-class Node<X>{
-
-    Node<X> next = null;
-    X value = null;
-
-    public Node(X value){this.value = value;}
-
-}
-
-/**
- * Simple Iterator implementation
- * @param <X> Type X over which Objects is Iterated
- */
-class NodeListIterator<X> implements IteratorGen<X> {
-
-    Node<X> current;
-
-    public NodeListIterator(Node<X> start){this.current = start;}
-
-    @Override
-    public boolean hasNext() {
-        return current != null;
-    }
-
-    @Override
-    public X next() {
-        if(!hasNext()) throw new NoSuchElementException();
-        X value = current.value;
-        current = current.next;
-        return value;
-    }
 }
