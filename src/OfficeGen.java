@@ -80,15 +80,16 @@ public class OfficeGen<K, V extends RoomGen<K, V>> implements ContainerInterface
         int len = 0;
         double result = 0.0;
 
-        Iterator<Room> rooms = this.rooms.getValues();
-        while (rooms.hasNext()){
-            Room room = rooms.next();
-            if(room.space() instanceof UsableSpace && room instanceof WindowRoom){
-                WindowRoom wRoom = (WindowRoom) room;
+        LinkedMapGen<K, V> current = rooms;
+        while (current != null){
+            V roomValue = rooms.getValue();
+            if(roomValue.getValue() instanceof UsableSpace && roomValue instanceof WindowRoom wRoom){
                 result+=wRoom.getArea();
                 len++;
             }
+            current = current.getNext();
         }
+
 
         if(len == 0) return 0;
         return result / len;
@@ -98,14 +99,14 @@ public class OfficeGen<K, V extends RoomGen<K, V>> implements ContainerInterface
         int len = 0;
         double result = 0.0;
 
-        Iterator<Room> rooms = this.rooms.getValues();
-        while (rooms.hasNext()){
-            Room room = rooms.next();
-            if(room.space() instanceof UsableSpace && room instanceof WindowlessRoom){
-                WindowlessRoom wRoom = (WindowlessRoom) room;
+        LinkedMapGen<K, V> current = rooms;
+        while (current != null){
+            V roomValue = rooms.getValue();
+            if(roomValue.getValue() instanceof UsableSpace && roomValue instanceof WindowlessRoom wRoom){
                 result+=wRoom.getArea();
                 len++;
             }
+            current = current.getNext();
         }
 
         if(len == 0) return 0;
@@ -116,14 +117,14 @@ public class OfficeGen<K, V extends RoomGen<K, V>> implements ContainerInterface
         int len = 0;
         double result = 0.0;
 
-        Iterator<Room> rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next();
-            if(room.space() instanceof StorageSpace){
-                StorageSpace storage = (StorageSpace) room.space();
+        LinkedMapGen<K, V> current = rooms;
+        while(current != null){
+            V roomValue = rooms.getValue();
+            if(roomValue.getValue() instanceof StorageSpace storage){
                 result+=storage.volume();
                 len++;
             }
+            current = current.getNext();
         }
 
         if(len == 0) return 0;
@@ -136,14 +137,14 @@ public class OfficeGen<K, V extends RoomGen<K, V>> implements ContainerInterface
         int len=0;
         double result=0.0;
 
-        Iterator<Room> rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next();
-            if(room.space() instanceof WorkSpace){
-                WorkSpace workSpace = (WorkSpace) room.space();
+        LinkedMapGen<K, V> current = rooms;
+        while(current != null){
+            V roomValue = rooms.getValue();
+            if(roomValue.getValue() instanceof WorkSpace workSpace){
                 result+=workSpace.workStations();
                 len++;
             }
+            current = current.getNext();
         }
 
         if(len == 0) return 0;
@@ -164,10 +165,10 @@ public class OfficeGen<K, V extends RoomGen<K, V>> implements ContainerInterface
         double sWindowArea=0.0;
 
 
-        Iterator<Room> rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next();
-            Space space = room.space();
+        LinkedMapGen<K, V> current = rooms;
+        while(current != null){
+            V room = current.getValue();
+            V space = room.getValue();
             if(space instanceof UsableSpace){
                 if(room instanceof WindowRoom){
                     if(space instanceof WorkSpace) {
@@ -180,6 +181,7 @@ public class OfficeGen<K, V extends RoomGen<K, V>> implements ContainerInterface
                     }
                 }
             }
+            current = current.getNext();
         }
 
         if(workingArea == 0.0 && storageArea == 0.0) return new double[]{0,0,0};
@@ -203,9 +205,10 @@ public class OfficeGen<K, V extends RoomGen<K, V>> implements ContainerInterface
         double sWindowArea=0.0;
 
 
-        Iterator<Room> rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next();
+        LinkedMapGen<K, V> current = rooms;
+        while(current != null){
+            //Room room = rooms.next();
+            V room = rooms.getValue();
             Space space = room.space();
             if(space instanceof UsableSpace){
                 if(room instanceof WindowlessRoom){
