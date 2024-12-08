@@ -3,8 +3,8 @@
 
 /*
     Wer was gemacht hat:
-    Julian -
-    Hamed -
+    Julian - Struktur, Alle NodeListen und Iterator, Space und Space Klassen, Kommentare, Nicht generische LinkedMaps, ContainerInterface und ContainerGen, Statistische Methoden in Office
+    Hamed - WindowRoom, WindowlessRoom
     Marian -
  */
 
