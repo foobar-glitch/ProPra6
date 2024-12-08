@@ -23,7 +23,7 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
 
     @Override
     public Integer id() {
-        return 0;
+        return id;
     }
 
     @Override

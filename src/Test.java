@@ -40,14 +40,14 @@ public class Test {
         // Accounting
         roomsGenOffice1.put(testGenRoom_Acc.getName(), testGenRoom_Acc);
         // Conference Room 1
-        roomsGenOffice1.put(testGenRoom_Acc.getName(), testGenRoom_CR1);
+        roomsGenOffice1.put(testGenRoom_CR1.getName(), testGenRoom_CR1);
         // contains Accounting and Conference Room 1
         OfficeGen<String, Room> testGenOffice1 = new OfficeGen<String, Room>(1, roomsGenOffice1);
 
         // Office2
         LinkedMapGen<String, Room> roomsGenOffice2 = new LinkedMapGen<String, Room>();
         // Conference Room 2
-        roomsGenOffice2.put(testGenRoom_Arc.getName(), testGenRoom_CR2);
+        roomsGenOffice2.put(testGenRoom_CR2.getName(), testGenRoom_CR2);
         // Archive
         roomsGenOffice2.put(testGenRoom_Arc.getName(), testGenRoom_Arc);
         // contains Conference Room 2 and Archive
@@ -56,9 +56,9 @@ public class Test {
         // Office3
         LinkedMapGen<String, Room> roomsGenOffice3 = new LinkedMapGen<String, Room>();
         // Cafeteria
-        roomsGenOffice3.put(testGenRoom_Arc.getName(), testGenRoom_Caf);
+        roomsGenOffice3.put(testGenRoom_Caf.getName(), testGenRoom_Caf);
         // Storage for Technical Equipment
-        roomsGenOffice3.put(testGenRoom_Arc.getName(), testGenRoom_TE);
+        roomsGenOffice3.put(testGenRoom_TE.getName(), testGenRoom_TE);
         // contains Cafeteria and Technical Equipment
         OfficeGen<String, Room> testGenOffice3 = new OfficeGen<String, Room>(3, roomsGenOffice3);
 
@@ -87,10 +87,12 @@ public class Test {
         testGenBuilding1_HQ.removeOffice(3);
         testGenBuilding2_Asia.removeOffice(3);
         // Test change Offices (add and remove Rooms)
-        testGenBuilding1_HQ.getOffice(1).addRoom("Conference Room 2",testGenBuilding1_HQ.getOffice(2).getRoom("Conference Room 2"));
+        testGenBuilding1_HQ.getOffice(1).addRoom("Conference Room 2", testGenBuilding1_HQ.getOffice(2).getRoom("Conference Room 2"));
         testGenBuilding1_HQ.getOffice(2).removeRoom("Conference Room 2");
         testGenBuilding1_HQ.getOffice(2).addRoom("Accounting",testGenBuilding1_HQ.getOffice(1).getRoom("Accounting"));
         testGenBuilding1_HQ.getOffice(1).removeRoom("Accounting");
+        testGenBuilding2_Asia.getOffice(4).addRoom("Accounting",testGenBuilding1_HQ.getOffice(1).getRoom("Accounting"));
+
         // Test change usage for Rooms
         testGenBuilding1_HQ.getOffice(2).getRoom("Office Materials").setSpace(new WorkSpace(2));
         testGenBuilding1_HQ.getOffice(2).getRoom("Conference Room 1").setSpace(new StorageSpace(100));
