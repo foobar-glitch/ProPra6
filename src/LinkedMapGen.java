@@ -108,7 +108,8 @@ public class LinkedMapGen<K, V> {
 
         LinkedMapGen<K, V> tmp = this;
         while(tmp!=null){
-            result.add(tmp.getValue());
+            if(tmp.value != null)
+                result.add(tmp.getValue());
             tmp = tmp.getNext();
         }
 
