@@ -19,7 +19,7 @@ public class OfficeNodeListIterator {
      * @return True if this.next() exists
      */
     public boolean hasNext() {
-        return current != null;
+        return current.next() != null;
     }
 
     /**

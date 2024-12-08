@@ -262,21 +262,22 @@ public class Office implements ContainerInterface<Integer>{
     }
 
     @Override
-    public String toString(){
-        String result = "Total Area: " + totalArea();
+    public String toString() {
+        String allOneString = "Office with id: " + Integer.toString(id);
+        allOneString += ("\n-------------------------");
+        allOneString += "\n\tTotal Area: " + totalArea();
         int[] numberOfSpaces = numberOfSpaces();
-        result += "\n" + "WorkSpaces: " + numberOfSpaces[0] + ", StorageSpaces: " + numberOfSpaces[1] + ", AdjacentSpaces: " + numberOfSpaces[2];
+        allOneString += "\n\t" + "WorkSpaces: " + numberOfSpaces[0] + ", StorageSpaces: " + numberOfSpaces[1] + ", AdjacentSpaces: " + numberOfSpaces[2];
 
-        result +=   "\n" + "Average Area of Rooms: " + averageAreaRoom() + ", "
-                    + "Average Area of Rooms with Windows: " + averageAreaRoomsWithWindows() + ", \n"
-                    + "Average Area of Rooms without Windows: " + averageAreaRoomsNoWindows() + ", \n"
-                    + "Average Volume of Storage Rooms: " + averageVolumeStorageRooms() + ", \n"
-                    + "Average Number of Workspaces: " + averageNumberOfWorkspaces() + ", \n"
-                    + "Average Window to Area Ratio: " + averageRatioWindowToArea()[0] + ", \n"
-                    + "Average LuminousFlux to Area Ratio: " + averageRatioLuminousFluxToArea()[0]
+        allOneString +=   "\n\t" + "Average Area of Rooms: " + averageAreaRoom() + ", "
+                + "\tAverage Area of Rooms with Windows: " + averageAreaRoomsWithWindows() + ", \n"
+                + "\tAverage Area of Rooms without Windows: " + averageAreaRoomsNoWindows() + ", \n"
+                + "\tAverage Volume of Storage Rooms: " + averageVolumeStorageRooms() + ", \n"
+                + "\tAverage Number of Workspaces: " + averageNumberOfWorkspaces() + ", \n"
+                + "\tAverage Window to Area Ratio: " + averageRatioWindowToArea()[0] + ", \n"
+                + "\tAverage LuminousFlux to Area Ratio: " + averageRatioLuminousFluxToArea()[0]
         ;
-        result+="\n";
-        return result;
+        return allOneString.replace("\n", "\n\t");
     }
 
     public Room getRoom(String name) {

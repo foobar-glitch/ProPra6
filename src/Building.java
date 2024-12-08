@@ -66,4 +66,15 @@ public class Building implements StringContainerInterface{
     public Office getOffice(int id) {
         return map.get(id);
     }
+
+    @Override
+    public String toString() {
+        String allOneString = "Building: " + name;
+        allOneString = allOneString.concat("\n-------------------------");
+        OfficeNodeListIterator elems = map.getValues();
+        while(elems.hasNext()){
+            allOneString = allOneString.concat("\n\t" + elems.next().toString());
+        }
+        return allOneString.replace("\n", "\n\t");
+    }
 }

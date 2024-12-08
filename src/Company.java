@@ -39,19 +39,11 @@ public class Company implements StringContainerInterface{
 
     @Override
     public void print(){
-
-        BuildingLinkedMap map = this.map;
-        System.out.println("Company: " + this.getName() );
-        System.out.println("#########################");
-        System.out.println();
-        int i=0;
-        BuildingNodeListIterator buildings = map.getValues();
-        while(buildings.hasNext()){
-            Building building = buildings.next();
-            System.out.println("Building " + i++ + ": " + building.getName());
-            System.out.println("-------------------------------");
-            building.print();
-            System.out.println();
+        BuildingNodeListIterator elems = map.getValues();
+        System.out.println(name);
+        System.out.println("-------------------------");
+        while(elems.hasNext()){
+            System.out.println("\t" + elems.next().toString());
         }
 
     }
