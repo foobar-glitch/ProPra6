@@ -1,4 +1,4 @@
-public class Company extends ContainerGen<String, Building> implements ContainerInterface<String>{
+public class Company implements StringContainerInterface{
 
     public Company(String name) {
         super(name);

@@ -145,6 +145,6 @@ public class OfficeLinkedMap {
     /**
      * @return Iterator over all values V inside this
      */
-    public RoomIterator getValues(){return valueList().iterator();}
+    public OfficeNodeListIterator getValues(){return valueList().iterator();}
 
 }

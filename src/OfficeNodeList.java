@@ -102,7 +102,7 @@ public class OfficeNodeList {
      * Live-Iterator over all elements in NodeList
      * @return Iterator
      */
-    public RoomIterator iterator(){
+    public OfficeNodeListIterator iterator(){
         return new OfficeNodeListIterator(start);
     }
 

@@ -1,7 +1,7 @@
 /**
  * Simple Node Implementation
  */
-class RoomNode{
+public class RoomNode{
 
     RoomNode next = null;
     Room value;

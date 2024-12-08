@@ -112,7 +112,7 @@ public class RoomNodeList {
      * Live-Iterator over all elements in NodeList
      * @return Iterator
      */
-    public RoomIterator iterator(){
+    public RoomNodeListIterator iterator(){
         return new RoomNodeListIterator(start);
     }
 

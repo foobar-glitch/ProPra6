@@ -144,6 +144,6 @@ public class RoomLinkedMap {
     /**
      * @return Iterator over all values V inside this
      */
-    public RoomIterator getValues(){return valueList().iterator();}
+    public RoomNodeListIterator getValues(){return valueList().iterator();}
 
 }
