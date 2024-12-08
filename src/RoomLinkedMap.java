@@ -58,32 +58,17 @@ public class RoomLinkedMap {
      * @param roomName roomName!=null, Name of the room which is the key of the dictionary
      * @param room Room !=null, Room which is the value of the dictionary
      */
-    public RoomLinkedMap insertPair(String roomName, Room room) {
-        // When room exists, overwrite
-        RoomLinkedMap current = this;
-
-        // Traverse the list to check if the room already exists
-        while (current != null) {
-            if (current.key.equals(roomName)) {
-                // If roomName exists, overwrite the value
-                current.value = room;
-                return current;
+    public void insertPair(String roomName, Room room) {
+        if ((this.key == null && this.value == null) || (this.key != null && this.key.equals(roomName))) {
+            this.key = roomName;
+            this.value = room;
+        } else {
+            if (next != null) {
+                next.insertPair(key, value);
+            } else {
+                next = new RoomLinkedMap(key, value);
             }
-            current = current.getNext();
         }
-
-        // If the roomName doesn't exist, append a new node to the end
-        // Traverse to the last node
-        RoomLinkedMap lastNode = this;
-        while (lastNode.getNext() != null) {
-            lastNode = lastNode.getNext();
-        }
-
-        // Now append the new node
-        lastNode.next = new RoomLinkedMap(roomName, room);
-
-        // Return the newly added node
-        return lastNode.getNext(); // Return the newly appended node
     }
 
     /**

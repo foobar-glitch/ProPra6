@@ -58,29 +58,17 @@ public class BuildingLinkedMap {
      * @param id id!=null, Name of the building which is the key of the dictionary
      * @param building building!=null, Building which is the value of the dictionary
      */
-    private BuildingLinkedMap insertPair(String id, Building building) {
-
-        BuildingLinkedMap current = this;
-
-        while (current != null) {
-            if (current.key.equals(id)) {
-                current.value = building;
-                return current;
+    private void insertPair(String id, Building building) {
+        if ((this.key == null && this.value == null) || (this.key != null && this.key.equals(id))) {
+            this.key = id;
+            this.value = building;
+        } else {
+            if (next != null) {
+                next.insertPair(key, value);
+            } else {
+                next = new BuildingLinkedMap(key, value);
             }
-            current = current.getNext();
         }
-
-
-        BuildingLinkedMap lastNode = this;
-        while (lastNode.getNext() != null) {
-            lastNode = lastNode.getNext();
-        }
-
-        // Now append the new node
-        lastNode.next = new BuildingLinkedMap(id, building);
-
-        // Return the newly added node
-        return lastNode.getNext(); // Return the newly appended node
     }
 
     /**
