@@ -1,4 +1,4 @@
-public class Building extends ContainerGen<Integer, Office> implements ContainerInterface<String>{
+public class Building extends ContainerGen<Integer, Office> implements StringContainerInterface{
 
     public Building(String name) {
         super(name);
