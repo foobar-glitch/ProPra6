@@ -1,11 +1,12 @@
 public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer> {
     private final int id;
     private final LinkedMapGen<K, V> rooms;
+    private final double adjacentRooms;
 
-    // TODO constructor soll laut Aufgabenstellung auch eine double mit der Fläche der Nebenraeume setzten!!!
-    public OfficeGen(int id, LinkedMapGen<K, V> rooms) {
+    public OfficeGen(int id, LinkedMapGen<K, V> rooms, double adjacentRooms) {
         this.id = id;
         this.rooms = rooms;
+        this.adjacentRooms = adjacentRooms;
     }
 
     @Override
@@ -14,7 +15,7 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
         allOneString += ("\n-------------------------");
         allOneString += "\n\tTotal Area: " + totalArea();
         int[] numberOfSpaces = numberOfSpaces();
-        allOneString += "\n\t" + "WorkSpaces: " + numberOfSpaces[0] + ", StorageSpaces: " + numberOfSpaces[1] + ", AdjacentSpaces: " + numberOfSpaces[2];
+        allOneString += "\n\t" + "WorkSpaces: " + numberOfSpaces[0] + ", StorageSpaces: " + numberOfSpaces[1] + "Area of Adjacent Rooms: " + getAreaOfAdjacentRooms();
 
         allOneString +=   "\n\t" + "Average Area of Rooms: " + averageAreaRoom() + ", "
                 + "\tAverage Area of Rooms with Windows: " + averageAreaRoomsWithWindows() + ", \n"
@@ -30,13 +31,7 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
     public int getId() {return id;}
 
     public double getAreaOfAdjacentRooms() {
-        double areaSideRooms = 0.0;
-        IteratorGen<V> rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next();
-            if(! (room.space() instanceof UsableSpace) ) areaSideRooms+=room.getArea();
-        }
-        return areaSideRooms;
+        return adjacentRooms;
     }
 
 
@@ -50,8 +45,6 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
 
     }
 
-    // TODO rework this?
-    //  shouldnt this always just be room.getName()???
     public void addRoom(K identifier, V room) {
         rooms.put(identifier, room);
     }
@@ -65,10 +58,13 @@ public class OfficeGen<K, V extends Room> implements ContainerInterface<Integer>
     }
 
     public double totalArea() {
-        double areaTotal = 0.0;
+        double areaTotal = adjacentRooms;
         IteratorGen<V> rooms = this.rooms.getValues();
         while(rooms.hasNext()){
-            areaTotal+=rooms.next().getArea();
+            Room currentRoom = rooms.next();
+            if (currentRoom.space() instanceof UsableSpace) {
+                areaTotal += currentRoom.getArea();
+            }
         }
         return areaTotal;
     }

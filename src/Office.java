@@ -1,10 +1,12 @@
 public class Office implements ContainerInterface<Integer>{
     private final int id;
     private final RoomLinkedMap rooms;
+    private final double adjacentRooms;
 
-    public Office(int id, RoomLinkedMap rooms) {
+    public Office(int id, RoomLinkedMap rooms, double adjacentRooms) {
         this.id = id;
         this.rooms = rooms;
+        this.adjacentRooms = adjacentRooms;
     }
 
     public int getId() {
@@ -12,20 +14,17 @@ public class Office implements ContainerInterface<Integer>{
     }
 
     public double getAreaOfAdjacentRooms() {
-        double areaSideRooms = 0.0;
-        RoomNodeListIterator rooms = this.rooms.getValues();
-        while(rooms.hasNext()){
-            Room room = rooms.next();
-            if(! (room.space() instanceof UsableSpace) ) areaSideRooms+=room.getArea();
-        }
-        return areaSideRooms;
+        return adjacentRooms;
     }
 
     public double totalArea() {
-        double areaTotal = 0.0;
+        double areaTotal = adjacentRooms;
         RoomNodeListIterator rooms = this.rooms.getValues();
         while(rooms.hasNext()){
-            areaTotal+=rooms.next().getArea();
+            Room currentRoom = rooms.next();
+            if (currentRoom.space() instanceof UsableSpace) {
+                areaTotal += currentRoom.getArea();
+            }
         }
         return areaTotal;
     }
@@ -265,9 +264,9 @@ public class Office implements ContainerInterface<Integer>{
     public String toString() {
         String allOneString = "Office with id: " + Integer.toString(id);
         allOneString += ("\n-------------------------");
-        allOneString += "\n\tTotal Area: " + totalArea();
+        allOneString += "\n\tTotal Area: " + totalArea() + ", Area of Adjacent Rooms: " + getAreaOfAdjacentRooms();
         int[] numberOfSpaces = numberOfSpaces();
-        allOneString += "\n\t" + "WorkSpaces: " + numberOfSpaces[0] + ", StorageSpaces: " + numberOfSpaces[1] + ", AdjacentSpaces: " + numberOfSpaces[2];
+        allOneString += "\n\t" + "WorkSpaces: " + numberOfSpaces[0] + ", StorageSpaces: " + numberOfSpaces[1];
 
         allOneString +=   "\n\t" + "Average Area of Rooms: " + averageAreaRoom() + ", "
                 + "\tAverage Area of Rooms with Windows: " + averageAreaRoomsWithWindows() + ", \n"

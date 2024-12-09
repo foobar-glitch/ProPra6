@@ -41,7 +41,7 @@ public class Test {
         // Conference Room 1
         roomsGenOffice1.put(testGenRoom_CR1.getName(), testGenRoom_CR1);
         // contains Accounting and Conference Room 1
-        OfficeGen<String, Room> testGenOffice1 = new OfficeGen<String, Room>(1, roomsGenOffice1);
+        OfficeGen<String, Room> testGenOffice1 = new OfficeGen<String, Room>(1, roomsGenOffice1, 150);
 
         // Office2
         LinkedMapGen<String, Room> roomsGenOffice2 = new LinkedMapGen<String, Room>();
@@ -50,7 +50,7 @@ public class Test {
         // Archive
         roomsGenOffice2.put(testGenRoom_Arc.getName(), testGenRoom_Arc);
         // contains Conference Room 2 and Archive
-        OfficeGen<String, Room> testGenOffice2 = new OfficeGen<String, Room>(2, roomsGenOffice2);
+        OfficeGen<String, Room> testGenOffice2 = new OfficeGen<String, Room>(2, roomsGenOffice2, 125);
 
         // Office3
         LinkedMapGen<String, Room> roomsGenOffice3 = new LinkedMapGen<String, Room>();
@@ -59,7 +59,7 @@ public class Test {
         // Storage for Technical Equipment
         roomsGenOffice3.put(testGenRoom_TE.getName(), testGenRoom_TE);
         // contains Cafeteria and Technical Equipment
-        OfficeGen<String, Room> testGenOffice3 = new OfficeGen<String, Room>(3, roomsGenOffice3);
+        OfficeGen<String, Room> testGenOffice3 = new OfficeGen<String, Room>(3, roomsGenOffice3, 75);
 
         // Office4
         LinkedMapGen<String, Room> roomsGenOffice4 = new LinkedMapGen<String, Room>();
@@ -68,7 +68,7 @@ public class Test {
         // Storage for Office Materials
         roomsGenOffice4.put(testGenRoom_OM.getName(), testGenRoom_OM);
         // contains Office Asia and Office Materials
-        OfficeGen<String, Room> testGenOffice4 = new OfficeGen<String, Room>(4, roomsGenOffice4);
+        OfficeGen<String, Room> testGenOffice4 = new OfficeGen<String, Room>(4, roomsGenOffice4, 200);
 
         System.out.println();
         System.out.println("----------------------------------------------------------------------------------------");
@@ -233,7 +233,7 @@ public class Test {
         // Conference Room 1
         roomsOffice1.put(testRoom_CR1.getName(), testRoom_CR1);
         // contains Accounting and Conference Room 1
-        Office testOffice1 = new Office(1, roomsOffice1);
+        Office testOffice1 = new Office(1, roomsOffice1, 150);
 
         // Office2
         RoomLinkedMap roomsOffice2 = new RoomLinkedMap();
@@ -242,7 +242,7 @@ public class Test {
         // Archive
         roomsOffice2.put(testRoom_Arc.getName(), testRoom_Arc);
         // contains Conference Room 2 and Archive
-        Office testOffice2 = new Office(2, roomsOffice2);
+        Office testOffice2 = new Office(2, roomsOffice2, 125);
 
         // Office3
         RoomLinkedMap roomsOffice3 = new RoomLinkedMap();
@@ -251,7 +251,7 @@ public class Test {
         // Storage for Technical Equipment
         roomsOffice3.put(testRoom_TE.getName(), testRoom_TE);
         // contains Cafeteria and Technical Equipment
-        Office testOffice3 = new Office(3, roomsOffice3);
+        Office testOffice3 = new Office(3, roomsOffice3, 75);
 
         // Office4
         RoomLinkedMap roomsOffice4 = new RoomLinkedMap();
@@ -260,7 +260,7 @@ public class Test {
         // Storage for Office Materials
         roomsOffice4.put(testRoom_OM.getName(), testRoom_OM);
         // contains Office Asia and Office Materials
-        Office testOffice4 = new Office(4, roomsOffice4);
+        Office testOffice4 = new Office(4, roomsOffice4, 200);
 
         System.out.println();
         System.out.println("----------------------------------------------------------------------------------------");
