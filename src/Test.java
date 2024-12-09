@@ -211,6 +211,17 @@ public class Test {
             System.out.println("ERROR: issue with changing usage of Room 'Office Materials' from 'StorageSpace' to 'WorkSpace'");
         }
 
+        // Test division by zero
+        // OfficeNoRooms
+        LinkedMapGen<String, Room> roomsGenOfficeNoRooms = new LinkedMapGen<String, Room>();
+        // add no rooms
+        // contains no rooms
+        OfficeGen<String, Room> testGenOfficeNoRooms = new OfficeGen<String, Room>(5, roomsGenOfficeNoRooms, 0);
+        System.out.println();
+        System.out.println("Test division by Zero:");
+        System.out.println("If an Office has no rooms the method 'averageAreaRoom()' returns the value " + testGenOfficeNoRooms.averageAreaRoom() );
+        System.out.println();
+
         // Test output all statistics
         System.out.println();
         testGenCompany_ExInc.print();
@@ -402,6 +413,17 @@ public class Test {
         } else {
             System.out.println("ERROR: issue with changing usage of Room 'Office Materials' from 'StorageSpace' to 'WorkSpace'");
         }
+
+        // Test division by zero
+        // OfficeNoRooms
+        RoomLinkedMap roomsOfficeNoRooms = new RoomLinkedMap();
+        // add no rooms
+        // contains no rooms
+        Office testOfficeNoRooms = new Office(5, roomsOfficeNoRooms, 0);
+        System.out.println();
+        System.out.println("Test division by Zero:");
+        System.out.println("If an Office has no rooms the method 'averageAreaRoom()' returns the value " + testOfficeNoRooms.averageAreaRoom() );
+        System.out.println();
 
         // Test output all statistics
         System.out.println();
